@@ -4,5 +4,6 @@ export const paths = {
     authors: "authors",
     publishier: "publishier",
     favorite: "favorite",
-    cart: "cart"
+    cart: "cart",
+    bookPage: "book/:id"
 };
