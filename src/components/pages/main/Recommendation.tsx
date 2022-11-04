@@ -4,14 +4,12 @@ import { useAppDispatch, useAppSelector } from "redux/store"
 import { getRecommendation } from "redux/books/recommendationSlice"; 
 
 import styled from 'styled-components'
+import { theme } from "components/common/styled";
+import { Container } from "components/common/styled"
+import { flex } from "components/common/styled"
+import { Label } from "components/common/styled";
 
 import { BookCart } from "./BookCart";
-import { Label } from "./BestsellerSlider";
-
-import { Book } from "redux/books/types";
-
-import { Container } from "components/common/Header"
-import { flex } from "components/common/Header"
 
 const Section = styled.section`
     padding: 20px 0 80px;
@@ -30,9 +28,7 @@ const Text = styled.p`
     margin: 20px 0;
     line-height: 32px;
     font-size: 24px;
-    color: #6b471c;
-    text-shadow: 0.5px 0.5px 0.5px gray;
-
+    color: ${theme.brown};
 `
 
 export const Recommendation: React.FC = () => {

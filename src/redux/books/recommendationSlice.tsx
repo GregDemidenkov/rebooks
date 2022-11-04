@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book } from "./types"
+import { Book, host } from "./types"
 
 export const getRecommendation = createAsyncThunk<Book[]>("recommendation/getRecommendation", async () => {
-    return fetch("http://localhost:3001/books?name=Тайная история")
+    return fetch(`${host}books?name=Тайная история`)
     .then((res) => 
         res.json()
     )

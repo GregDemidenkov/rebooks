@@ -4,12 +4,14 @@ import { useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux';
 import bestsellersReducer from "./books/bestsellersSlice"
 import recommendationReducer from "./books/recommendationSlice"
 import bookPageReducer from "./books/bookPageSlice"
+import booksReducer from "./books/booksSlice";
 
 export const store = configureStore({
     reducer: {
         bestsellers: bestsellersReducer,
         recommendation: recommendationReducer,
-        book: bookPageReducer
+        book: bookPageReducer,
+        books: booksReducer
     }
 })
 

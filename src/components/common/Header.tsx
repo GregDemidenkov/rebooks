@@ -1,26 +1,19 @@
 import React from "react"
 import { NavLink} from 'react-router-dom'
-import styled from 'styled-components'
 
-import logo from 'assets/img/logo.svg';
-import cart from 'assets/img/cart.svg';
-import heart from 'assets/img/heart.svg';
+import styled from 'styled-components'
+import { theme } from "./styled"
+import { flex } from "./styled";
+import { Container } from "./styled";
+
+import logoSvg from 'assets/img/logo.svg';
 import search from 'assets/img/search.svg'
 
-export const flex: string = `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-
-export const Container = styled.div`
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 16px;
-`
+import { FavoriteIcon } from "components/ui/FavoriteIcon";
+import { CartIcon } from "components/ui/CartIcon";
 
 const HeaderStyled = styled.header`
-    background-color: #F8F3ED;
+    background-color: ${theme.beige};
     position: fixed;
     width: 100%;
     top: 0;
@@ -33,12 +26,12 @@ const HeaderContent = styled.div`
 
 const Icon = styled.img`
     height: auto;
-    width: ${(props: any) => props.width};
+    width: ${(props: {width: string}) => props.width};
 `
 
 const StoreName = styled.h1`
     font-size: 36px;
-    color: #6b471c;
+    color: ${theme.brown};
     margin-right: 20px;
 `
 
@@ -53,8 +46,8 @@ const SearchInput = styled.input`
     outline: none;
     padding: 0 30px 0;
     font-size: 16px;
-    color: #6b471c;
-    border: 1px solid #6b471c;
+    color: ${theme.brown};
+    border: 1px solid ${theme.brown};
     border-radius: 4px 0 0 4px;
     background-color: #F8F3ED;
     background-image: url(${search});
@@ -62,42 +55,42 @@ const SearchInput = styled.input`
     background-position: 2px 4px;
     background-size: 20px;
     ::placeholder {
-        color: #6b471c;
+        color: ${theme.brown};
     }
 `
 
 const Button = styled.button`
     width: 15%;
     height: 32px;
-    background-color: #6b471c;
-    color: #F8F3ED;
+    background-color: ${theme.brown};
+    color: ${theme.beige};
     border-radius: 0 4px 4px 0;
     cursor: pointer;
 `
 
 const Nav = styled.nav`
     ${flex}
-    ${(props: any) => props.pages &&`
+    ${(props: {pages: boolean}) => props.pages &&`
         width: 600px;
         margin: 0 auto 9px;
         .active {
-            background-color: #6b471c;
-            color: #F8F3ED;
+            background-color: ${theme.brown};
+            color: ${theme.beige};
             border-radius: 30px;
         }
     `}
-    ${(props: any) => props.personalPages &&`
+    ${(props: {personalPages: boolean}) => props.personalPages &&`
         margin: 0 20px 0;
         width: 80px;
     `}
 `
 
 const NavLinkStyled = styled(NavLink)`
-    ${(props: any) => props.logo &&`
+    ${(props: {logo: boolean}) => props.logo &&`
         ${flex};
     `}
-    ${(props: any) => props.pagesEl &&`
-        color: #6b471c;
+    ${(props: {pagesEl: boolean}) => props.pagesEl &&`
+        color: ${theme.brown};
         font-size: 16px;
         width: 130px;
         text-align: center;
@@ -114,7 +107,7 @@ export const Header: React.FC = () => {
                     <NavLinkStyled to = "/" logo>
                         <Icon 
                             width = "60px" 
-                            src = {logo} 
+                            src = {logoSvg} 
                             alt = "ReBooks" 
                         />
                         <StoreName>ReBooks</StoreName>
@@ -125,17 +118,17 @@ export const Header: React.FC = () => {
                     </Search>
                     <Nav personalPages>
                         <NavLinkStyled to = "/favorite">
-                            <Icon 
-                                width = "22px" 
-                                src = {heart} 
-                                alt = "heart"
+                            <FavoriteIcon
+                                width = "28px"
+                                height = "28px"
+                                toFavorite
                             />
                         </NavLinkStyled>
                         <NavLinkStyled to = "/cart">
-                            <Icon 
-                                width = "30px" 
-                                src = {cart} 
-                                alt = "cart"
+                            <CartIcon 
+                                width = "28px"
+                                height = "28px"
+                                fill = {theme.brown}
                             />
                         </NavLinkStyled>
                     </Nav>

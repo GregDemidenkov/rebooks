@@ -1,9 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import styled from 'styled-components'
 
-import { Container } from "components/common/Header"
-import { flex } from "components/common/Header"
+import styled from 'styled-components'
+import { theme } from "components/common/styled"
+import { Container } from "components/common/styled"
+import { flex } from "components/common/styled"
 
 import booksBack from 'assets/img/booksBack.png'
 
@@ -36,14 +37,14 @@ const Info = styled.div`
 const Slogan = styled.h2`
     text-align: center;
     font-size: 52px;
-    color: #6b471c;
+    color: ${theme.brown};
     text-shadow: 1px 1px 1px black;
 `
 
 const Text = styled.p`
     font-size: 24px;
-    color: #F8F3ED;
-    background-color: #6b471c;
+    color: ${theme.beige};
+    background-color: ${theme.brown};
     padding: 8px 10px;
     border-radius: 7px;
 `
@@ -56,12 +57,12 @@ const Bestseller = styled(Link)`
 
 const BestsellerInfo = styled.h3`
     font-size: 20px;
-    color: #F8F3ED;
+    color: ${theme.beige};
     margin-bottom: 5px;
     position: absolute;
     bottom: -1px;
     text-align: center;
-    background-color: #6b471c;
+    background-color: ${theme.brown};
     padding: 5px 0;
     width: 100%;
 `

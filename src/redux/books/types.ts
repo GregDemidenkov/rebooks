@@ -1,6 +1,6 @@
 export const host = "http://localhost:3001/"
 
-type characteristics = {
+export type characteristics = {
     year: number,
     pageCount: number,
     binding: string,
@@ -10,19 +10,19 @@ type characteristics = {
     genre: string
 }
 
-type info = {
+export type price = {
     price: number,
-    discount: number,
+    discount: number | null,
     inStock: boolean,
     countInStock: number
 }
 
-type content = {
+export type content = {
     annotation: string,
     quotes: string[]
 }
 
-type raiting = {
+export type raiting = {
     raitingReBooks: number,
     countReBoks: number,
     raitingLiveLib: number,
@@ -36,8 +36,8 @@ export type Book = {
     author: string,
     imgUrlFront: string,
     imgUrlBack: string,
-    characteristics: {},
-    info: {},
-    content: {},
-    raiting: {} 
+    characteristics: characteristics,
+    info: price,
+    content: content,
+    raiting: raiting
   };

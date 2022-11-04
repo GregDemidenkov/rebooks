@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { Book, host } from "./types"
 
-export const getBookById = createAsyncThunk<Book[]>("book/getBookById", async (id: number) => {
-    return fetch(`${host}books?id=${id}`)
-    .then((res) => 
-        res.json()
-    )
+export const getBookById = createAsyncThunk("book/getBookById", async (id: string | undefined) => {
+    const response = await fetch(`${host}books?id=${id}`)
+    return (await response.json()) as Book[]
 })
 
 type bookState = {

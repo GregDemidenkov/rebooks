@@ -1,19 +1,22 @@
 import React from "react"
-import { NavLink} from 'react-router-dom'
+
 import styled from 'styled-components'
+import { theme } from "./styled"
 
 const FooterStyled = styled.footer`
     position: absolute;
     width: 100%;
-    background-color: #F8F3ED;
-    padding: 25px 0 15px;
+    background-color: ${theme.beige};
+    padding: 10px 0 0;
     text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
     p {
         margin-bottom: 10px;
-        color: #6b471c;
+        color: ${theme.brown};
     }
     a {
-        color: #6b471c;
+        color: ${theme.brown};
         text-decoration: underline
     }
 `
