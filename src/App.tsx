@@ -8,6 +8,7 @@ import { Authors } from 'pages/Authors';
 import { Publishier } from 'pages/Publishier';
 import { Favorite } from 'pages/Favorite';
 import { Cart } from 'pages/Cart';
+import { BookPage } from 'pages/BookPage';
 
 import {paths} from './routing/config'
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route path = {paths.publishier} element = {<Publishier />}></Route>
           <Route path = {paths.favorite} element = {<Favorite />}></Route>
           <Route path = {paths.cart} element = {<Cart />}></Route>
+          <Route path = {paths.bookPage} element = {<BookPage />}></Route>
         </Route>
     </Routes>
   );

@@ -1,0 +1,36 @@
+.slick-carousel {    
+    .slick-prev {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        z-index: 40;
+    } 
+    .slick-next {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        z-index: 40;
+    }
+    .slick-prev::before, .slick-next::before {
+        font-size: 40px;
+        color: #6b471c;
+    }
+    .slick-slide {
+        div {
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .slick-dots {
+        li {
+            button::before {
+                color: #6b471c;
+            }
+        }
+        .slick-active {
+            button::before {
+                color: #6b471c;
+            }
+        }
+    }
+}

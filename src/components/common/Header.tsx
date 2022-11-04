@@ -1,59 +1,100 @@
 import React from "react"
 import { NavLink} from 'react-router-dom'
+
 import styled from 'styled-components'
+import { theme } from "./styled"
+import { flex } from "./styled";
+import { Container } from "./styled";
 
-import logo from 'assets/img/logo.svg';
-import cart from 'assets/img/cart.svg';
-import heart from 'assets/img/heart.svg';
+import logoSvg from 'assets/img/logo.svg';
+import search from 'assets/img/search.svg'
 
-const flex: string = `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
+import { FavoriteIcon } from "components/ui/FavoriteIcon";
+import { CartIcon } from "components/ui/CartIcon";
 
 const HeaderStyled = styled.header`
+    background-color: ${theme.beige};
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+`
+
+const HeaderContent = styled.div`
     ${flex}
 `
 
 const Icon = styled.img`
     height: auto;
-    width: ${(props: any) => props.width}
+    width: ${(props: {width: string}) => props.width};
 `
 
 const StoreName = styled.h1`
     font-size: 36px;
-    color: #6b471c;
+    color: ${theme.brown};
     margin-right: 20px;
+`
+
+const Search = styled.div`
+    ${flex}
+    width: 50%;
+`
+
+const SearchInput = styled.input`
+    width: 85%;
+    height: 30px;
+    outline: none;
+    padding: 0 30px 0;
+    font-size: 16px;
+    color: ${theme.brown};
+    border: 1px solid ${theme.brown};
+    border-radius: 4px 0 0 4px;
+    background-color: #F8F3ED;
+    background-image: url(${search});
+    background-repeat: no-repeat;
+    background-position: 2px 4px;
+    background-size: 20px;
+    ::placeholder {
+        color: ${theme.brown};
+    }
+`
+
+const Button = styled.button`
+    width: 15%;
+    height: 32px;
+    background-color: ${theme.brown};
+    color: ${theme.beige};
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
 `
 
 const Nav = styled.nav`
     ${flex}
-    ${(props: any) => props.pages &&`
+    ${(props: {pages: boolean}) => props.pages &&`
         width: 600px;
-        margin: 9px 0 0;
+        margin: 0 auto 9px;
         .active {
-            background-color: #6b471c;
-            color: #F8F3ED;
+            background-color: ${theme.brown};
+            color: ${theme.beige};
             border-radius: 30px;
         }
     `}
-    ${(props: any) => props.personalPages &&`
-        margin: 10px 20px 0;
+    ${(props: {personalPages: boolean}) => props.personalPages &&`
+        margin: 0 20px 0;
         width: 80px;
     `}
 `
 
 const NavLinkStyled = styled(NavLink)`
-    ${(props: any) => props.logo &&`
-        ${flex}
+    ${(props: {logo: boolean}) => props.logo &&`
+        ${flex};
     `}
-    ${(props: any) => props.pagesEl &&`
-        color: #6b471c;
-        font-size: 24px;
-        width: 160px;
+    ${(props: {pagesEl: boolean}) => props.pagesEl &&`
+        color: ${theme.brown};
+        font-size: 16px;
+        width: 130px;
         text-align: center;
-        padding: 12px 0;
+        padding: 8px 0;
     `}
 `
 
@@ -61,35 +102,45 @@ export const Header: React.FC = () => {
     
     return (
         <HeaderStyled>
-            <NavLinkStyled to = "/" logo>
-                <Icon 
-                    width = "100px" 
-                    src = {logo} 
-                    alt = "ReBooks" 
-                />
-                <StoreName>ReBooks</StoreName>
-            </NavLinkStyled>
-            <Nav pages>
-                <NavLinkStyled to = "/books" pagesEl >Книги</NavLinkStyled>
-                <NavLinkStyled to = "/authors" pagesEl >Авторы</NavLinkStyled>
-                <NavLinkStyled to = "/publishier" pagesEl >Издательства</NavLinkStyled>
-            </Nav>
-            <Nav personalPages>
-                <NavLinkStyled to = "/favorite">
-                    <Icon 
-                        width = "30px" 
-                        src = {heart} 
-                        alt = "heart"
-                    />
-                </NavLinkStyled>
-                <NavLinkStyled to = "/cart">
-                    <Icon 
-                        width = "38px" 
-                        src = {cart} 
-                        alt = "cart"
-                    />
-                </NavLinkStyled>
-            </Nav>
+            <Container>
+                <HeaderContent>
+                    <NavLinkStyled to = "/" logo>
+                        <Icon 
+                            width = "60px" 
+                            src = {logoSvg} 
+                            alt = "ReBooks" 
+                        />
+                        <StoreName>ReBooks</StoreName>
+                    </NavLinkStyled>
+                    <Search>
+                        <SearchInput placeholder = "Поиск книг, авторов"></SearchInput>
+                        <Button>Найти</Button>
+                    </Search>
+                    <Nav personalPages>
+                        <NavLinkStyled to = "/favorite">
+                            <FavoriteIcon
+                                width = "28px"
+                                height = "28px"
+                                toFavorite
+                            />
+                        </NavLinkStyled>
+                        <NavLinkStyled to = "/cart">
+                            <CartIcon 
+                                width = "28px"
+                                height = "28px"
+                                fill = {theme.brown}
+                            />
+                        </NavLinkStyled>
+                    </Nav>
+                </HeaderContent>
+                <HeaderContent>
+                    <Nav pages>
+                        <NavLinkStyled to = "/books" pagesEl >Книги</NavLinkStyled>
+                        <NavLinkStyled to = "/authors" pagesEl >Авторы</NavLinkStyled>
+                        <NavLinkStyled to = "/publishier" pagesEl >Издательства</NavLinkStyled>
+                    </Nav>
+                </HeaderContent>
+            </Container>
         </HeaderStyled>
     )
 }
