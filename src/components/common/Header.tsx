@@ -26,13 +26,19 @@ const HeaderContent = styled.div`
 
 const Icon = styled.img`
     height: auto;
-    width: ${(props: {width: string}) => props.width};
+    width: 60px;
+    @media(max-width: 1300px) {
+        width: 40px;
+    }
 `
 
 const StoreName = styled.h1`
     font-size: 36px;
     color: ${theme.brown};
     margin-right: 20px;
+    @media(max-width: 1300px) {
+        font-size: 22px;
+    }
 `
 
 const Search = styled.div`
@@ -47,15 +53,18 @@ const SearchInput = styled.input`
     padding: 0 30px 0;
     font-size: 16px;
     color: ${theme.brown};
-    border: 1px solid ${theme.brown};
-    border-radius: 4px 0 0 4px;
+    border: 1px solid ${theme.brown}20;
+    border-radius: 8px;
     background-color: #F8F3ED;
     background-image: url(${search});
     background-repeat: no-repeat;
     background-position: 2px 4px;
     background-size: 20px;
     ::placeholder {
-        color: ${theme.brown};
+        color: ${theme.brown}99;
+    }
+    @media(max-width: 1300px) {
+        height: 25px;
     }
 `
 
@@ -69,19 +78,21 @@ const Button = styled.button`
 `
 
 const Nav = styled.nav`
-    ${flex}
+    ${flex};
     ${(props: {pages: boolean}) => props.pages &&`
         width: 600px;
         margin: 0 auto 9px;
         .active {
             background-color: ${theme.brown};
             color: ${theme.beige};
-            border-radius: 30px;
         }
     `}
     ${(props: {personalPages: boolean}) => props.personalPages &&`
         margin: 0 20px 0;
         width: 80px;
+        @media(max-width: 1300px) {
+            width: 60px;
+        }
     `}
 `
 
@@ -95,6 +106,15 @@ const NavLinkStyled = styled(NavLink)`
         width: 130px;
         text-align: center;
         padding: 8px 0;
+        border-radius: 30px;
+        :hover {
+            background-color: ${theme.brown}90;
+            color: ${theme.beige};
+        }
+        @media(max-width: 1300px) {
+            width: 100px;
+            padding: 4px 0;
+        }
     `}
 `
 
@@ -105,8 +125,7 @@ export const Header: React.FC = () => {
             <Container>
                 <HeaderContent>
                     <NavLinkStyled to = "/" logo>
-                        <Icon 
-                            width = "60px" 
+                        <Icon  
                             src = {logoSvg} 
                             alt = "ReBooks" 
                         />
@@ -114,7 +133,7 @@ export const Header: React.FC = () => {
                     </NavLinkStyled>
                     <Search>
                         <SearchInput placeholder = "Поиск книг, авторов"></SearchInput>
-                        <Button>Найти</Button>
+                        {/* <Button>Найти</Button> */}
                     </Search>
                     <Nav personalPages>
                         <NavLinkStyled to = "/favorite">

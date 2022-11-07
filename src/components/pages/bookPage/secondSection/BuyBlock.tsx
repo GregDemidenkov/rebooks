@@ -1,8 +1,7 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { flex } from "components/common/styled";
+import { theme, flex, ButtonBuy } from "components/common/styled";
 
 import { price } from 'redux/books/types'
 
@@ -85,20 +84,6 @@ const Discount = styled.p`
     border-radius: 5px;
 `
 
-const ButtonBuy = styled.button`
-    padding: 15px 30px;
-    margin: 35px 0 0 20px;
-    width: calc(100% - 40px);
-    border-radius: 5px;
-    background-color: ${theme.orange};
-    color: ${theme.beige};
-    font-size: 16px;
-    cursor: pointer;
-    :hover {
-        background-color: ${theme.orange}99;
-    }
-`
-
 const FavoriteBlock = styled.a`
     ${flex};
     justify-content: flex-start;
@@ -118,8 +103,6 @@ export const BuyBlock: React.FC<BuyBlockType> = ({priceObj}) => {
         ? Math.trunc(priceObj.price * (100 - priceObj.discount) / 100)
         : priceObj?.price
 
-    console.log(curentPrice);
-    
         
     return (
         <Wrapper>
@@ -141,7 +124,7 @@ export const BuyBlock: React.FC<BuyBlockType> = ({priceObj}) => {
                         }
                     </CurentPriceBlock>
                 </PriceBlock>
-                <ButtonBuy>Добавить в корзину</ButtonBuy>
+                <ButtonBuy bookPage>Добавить в корзину</ButtonBuy>
                 <FavoriteBlock>
                     <FavoriteIcon 
                         width = "22px"

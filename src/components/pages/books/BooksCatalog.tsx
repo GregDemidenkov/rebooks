@@ -1,23 +1,38 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import { theme } from 'components/common/styled'
+import { theme, flex } from 'components/common/styled'
 
-const Wrapper = styled.section`
-    margin-top: 40px;
-`
+import { Book } from 'redux/books/types'
+
+import { BookCart } from './BookCart'
+import { Sort } from './sort/Sort'
+
+type BooksCatalogType = {
+    books: Book[];
+    onChangeSort: Function,
+}
+
 
 const CatalogContent = styled.div`
-    display: flex;
-    flex-direction: column;
+    ${flex};
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-basis: 85%;
 `
 
-export const BooksCatalog: React.FC = () => {
+export const BooksCatalog: React.FC<BooksCatalogType> = ({books, onChangeSort}) => {
 
     return (
-        <Wrapper>
-            <CatalogContent>
-            </CatalogContent>
-        </Wrapper>
+        <CatalogContent>
+            <Sort 
+                onChangeSort = {onChangeSort}
+            />
+            {
+                books.map((book) => (
+                    <BookCart key = {book.id} book = {book} />
+                ))
+            }
+        </CatalogContent>
     )
 }

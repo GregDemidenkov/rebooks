@@ -16,10 +16,8 @@ export const Main: React.FC = () => {
     
     useEffect(() => {
         dispatch(getBestsellers())
+        document.title = "Главная"
     }, [])
-
-    console.log(list);
-    
     
     return(
         <ContainerContent>

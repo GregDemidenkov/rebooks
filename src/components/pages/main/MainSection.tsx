@@ -19,6 +19,9 @@ const Section = styled.section`
     background-repeat: no-repeat;
     background-position: 0 100px;
     background-size: 40%;
+    @media(max-width: 1300px) {
+        background-position: 0 75px;
+    }
 `
 
 const SectionContent = styled.section`

@@ -24,6 +24,11 @@ const Icon = styled.svg`
             fill: ${theme.orange};
         }
     `}
+    @media(max-width: 1300px) {
+        width: 20px;
+        height: 20px;
+    }
+    
 `
 
 

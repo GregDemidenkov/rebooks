@@ -42,7 +42,7 @@
             "id": 2,
             "name": "Настоящая жизнь",
             "author": "Дьедоне Аделин",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/df5/df5281922d03fe129aed9ccdbc6c7c6c/36b9778fe195fc788d79f15725fda832.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000001049437/COVER/cover13d__w410.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000001049437/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2020,
@@ -320,8 +320,8 @@
             "id": 10,
             "name": "Невинная",
             "author": "Болдаччи Дэвид",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/3fe/3fe6329e47cd8425dec382319d6aa21d/595103d6f3dea23c5dbfa3361c01913e.jpg",
-            "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000001058104/COVER/cover4__w820.webp",
+            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/946/946247b7648dad287f776f69a36adf2e/a285c0181f8795b69195af17eacdd440.jpg",
+            "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000000980526/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2019,
                 "pageCount": 448,
@@ -496,7 +496,7 @@
             "id": 15,
             "name": "Подменыш",
             "author": "Лаваль Виктор",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/d8c/d8c488480199ac9f545173d31bde4d26/9dab32dde7d555b7325c7fd5104a16ea.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000001048821/COVER/cover13d__w410.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000001048821/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2019,
@@ -529,7 +529,7 @@
             "id": 16,
             "name": "Волки из Мерси-Фоллз. Превращение",
             "author": "Мэгги Стивотер",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1192/iblock/b3a/b3a20300ed473b45b279466c5923f3c1/3ed2539ebfbe86ff9dfdd481af53ebbf.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000000933557/COVER/cover13d__w410.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000000933557/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2019,
@@ -632,7 +632,7 @@
             "id": 19,
             "name": "Трюкач",
             "author": "Мельтцер Брэд",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/2a0/2a07ec5c982cbb7101f007fd137b4c42/38242cbf76d1a1248e7d67cf52ddef62.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000001045841/COVER/cover13d__w410.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000001045841/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2020,
@@ -1318,7 +1318,7 @@
             "id": 39,
             "name": "История ворона",
             "author": "Уинтерс Кэт",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/136/136de5ead20ebd9aedd6d7cddcca9146/3d48fd406af76f3446c85e302a227978.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000000991359/COVER/cover13d__w820.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000000991359/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2019,
@@ -1817,7 +1817,7 @@
             "id": 54,
             "name": "Окей, мозг, где я? Как работает наша внутренняя система навигации, зачем нужны воспоминания и почему иногда они стираются",
             "author": "Эйкесет Унни",
-            "imgUrlFront": "https://ndc.book24.ru/resize/820x1180/iblock/932/9323a24e9b157712db95c00ca1e3ee41/c5cc980d8e516eb2a8449a9ec4edeccc.jpg",
+            "imgUrlFront": "https://cdn.book24.ru/v2/ITD000000001108798/COVER/cover13d__w410.webp",
             "imgUrlBack": "https://cdn.book24.ru/v2/ITD000000001108798/COVER/cover4__w820.webp",
             "characteristics": {
                 "year": 2020,

@@ -31,3 +31,26 @@ export const Label = styled.h2`
     text-align: center;
     text-shadow: 1px 1px 1px gray;
 `
+
+export const ButtonBuy = styled.button`
+    width: calc(100% - 40px);
+    border-radius: 5px;
+    background-color: ${theme.orange};
+    color: ${theme.beige};
+    font-size: 14px;
+    cursor: pointer;
+    ${(props: {bookCart: boolean}) => props.bookCart &&`
+        padding: 10px 0;
+        @media(max-width: 1300px) {
+            padding: 8px;
+            font-size: 9px;
+        }
+    `};
+    ${(props: {bookPage: boolean}) => props.bookPage &&`
+        padding: 15px 30px;
+        margin: 35px 0 0 20px;
+    `};
+    :hover {
+        background-color: ${theme.orange}99;
+    }
+`

@@ -40,7 +40,7 @@ const WrapperText = styled.div`
     box-shadow: inset 0px -19px 19px -5px ${theme.darkBiege};
 `
 const ShortInformation = styled.p`
-    position:relative;
+    position: relative;
     z-index:-1;    
     font-size: 16px;
     color: ${theme.gray};

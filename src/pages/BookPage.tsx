@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import styled from 'styled-components'
 import { theme } from "components/common/styled";
 import { Container, ContainerContent } from "components/common/styled";
-import { flex } from "components/common/styled";
 
 import { useAppDispatch, useAppSelector } from "redux/store"
 import { getBookById } from "redux/books/bookPageSlice"
@@ -21,6 +20,9 @@ const FirstSection = styled.section`
     display: flex;
     flex-direction: column;
     margin-top: 137px;
+    @media(max-width: 1300px) {
+        margin-top: 100px;
+    }
 `
 const HeaderBook = styled.h2`
     font-size: 28px;
@@ -47,10 +49,12 @@ export const BookPage: React.FC = () => {
     
     useEffect(() => {
         dispatch(getBookById(id))
-
         window.scrollTo(0, 0);
-        document.title = "Страница книги"
-    }, [])    
+    }, [])
+    
+    useEffect(() => {
+        document.title = `${book?.name !== undefined ? book?.name : "Книга"}, ${book?.author !== undefined ? book?.author : "Автор"}`
+    }, [loading])
 
     return (
        <Container>
