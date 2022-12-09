@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from 'styled-components'
 import { theme } from "components/common/styled";
+
 import { Wrapper, Label } from "./AnnotationBlock";
 
 import quotesImg from 'assets/img/quotes.svg'

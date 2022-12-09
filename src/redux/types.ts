@@ -14,7 +14,8 @@ export type price = {
     price: number,
     discount: number | null,
     inStock: boolean,
-    countInStock: number
+    countInStock: number,
+    currentPrice: number
 }
 
 export type content = {
@@ -40,4 +41,32 @@ export type Book = {
     info: price,
     content: content,
     raiting: raiting
-  };
+};
+
+export type Author = {
+    id: number,
+    name: string,
+    photoUrl: string,
+    about: string
+}
+
+export type Publisher = {
+    id: number,
+    name: string,
+    imgLogo: string,
+    year: number,
+    country: string,
+    site: string,
+    about: string
+}
+
+export type BookInCart = {
+    id: number,
+    name: string,
+    author: string,
+    img: string,
+    price: number,
+    discount: number | null,
+    currentPrice: number,
+    count: number
+}

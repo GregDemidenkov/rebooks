@@ -16,7 +16,7 @@ const Icon = styled.svg`
     }
     ${(props: {toFavorite: boolean}) => props.toFavorite &&` 
         path {
-            fill: ${theme.brown};
+            fill: ${theme.orange};
         }
     `}
     ${(props: {active: boolean}) => props.active &&`

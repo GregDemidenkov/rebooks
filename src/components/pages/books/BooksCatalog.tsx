@@ -1,18 +1,21 @@
 import React from 'react'
 
-import styled from 'styled-components'
-import { theme, flex } from 'components/common/styled'
+import { useAppSelector } from "redux/store"
 
-import { Book } from 'redux/books/types'
+import styled from 'styled-components'
+import { flex } from 'components/common/styled'
+
+import { Book } from 'redux/types'
 
 import { BookCart } from './BookCart'
 import { Sort } from './sort/Sort'
+import { Pagination } from './Pagination'
 
 type BooksCatalogType = {
     books: Book[];
     onChangeSort: Function,
+    onChangePage: Function
 }
-
 
 const CatalogContent = styled.div`
     ${flex};
@@ -21,10 +24,11 @@ const CatalogContent = styled.div`
     flex-basis: 85%;
 `
 
-export const BooksCatalog: React.FC<BooksCatalogType> = ({books, onChangeSort}) => {
-
+export const BooksCatalog: React.FC<BooksCatalogType> = ({books, onChangeSort, onChangePage}) => {
+    const {category} = useAppSelector((state) => state.books)
+    
     return (
-        <CatalogContent>
+        <CatalogContent altJustify = {books.length <= 12 ? true : false}>
             <Sort 
                 onChangeSort = {onChangeSort}
             />
@@ -32,6 +36,10 @@ export const BooksCatalog: React.FC<BooksCatalogType> = ({books, onChangeSort}) 
                 books.map((book) => (
                     <BookCart key = {book.id} book = {book} />
                 ))
+            }
+            {
+                (category === "Все категории" || books.length >= 12)  &&
+                <Pagination onChangePage = {onChangePage}/>
             }
         </CatalogContent>
     )

@@ -2,11 +2,9 @@ import React from "react"
 import { Link } from "react-scroll";
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { flex } from "components/common/styled";
+import { theme, flex } from "components/common/styled";
 
-import { content } from "redux/books/types";
-import { characteristics } from "redux/books/types";
+import { content, characteristics } from "redux/types";
 
 type infoBlockType = {
     contentObj: content | null,
@@ -37,7 +35,7 @@ const Label = styled.h3`
 
 const WrapperText = styled.div`
     cursor: text;
-    box-shadow: inset 0px -19px 19px -5px ${theme.darkBiege};
+    box-shadow: inset 0px -19px 19px -5px ${theme.beige};
 `
 const ShortInformation = styled.p`
     position: relative;
@@ -45,6 +43,7 @@ const ShortInformation = styled.p`
     font-size: 16px;
     color: ${theme.gray};
     line-height: 22px;
+    text-align: justify;
     overflow: hidden;
     word-wrap: break-word;
     text-overflow: ellipsis;
@@ -99,7 +98,7 @@ export const RowEl = styled.th`
 `
 
 export const Parametr = styled.span`
-    background-color: ${theme.darkBiege};
+    background-color: ${theme.beige};
     position: relative;
     display: inline;
     align-items: flex-start;

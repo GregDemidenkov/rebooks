@@ -1,12 +1,11 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled"
-import { flex } from "components/common/styled"
+import { theme, flex } from "components/common/styled"
 
 import { Raitings } from "./Raitings"
 
-import { raiting } from 'redux/books/types'
+import { raiting } from 'redux/types'
 
 const Wrapper = styled.div`
     margin-bottom: 20px;

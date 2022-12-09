@@ -23,16 +23,22 @@ const Wrapper = styled.div`
 export const Raitings: React.FC<RaitingsType> = ({raitingReBooks, countReBoks, raitingLiveLib, countLiveLib}) => {
     return (
         <Wrapper>
-            <RaitingItem 
-                icon = {star}
-                raiting = {raitingReBooks}
-                count = {countReBoks}
-            />
-            <RaitingItem 
-                icon = {liveLib}
-                raiting = {raitingLiveLib}
-                count = {countLiveLib}
-            />
+            {
+                raitingReBooks &&
+                <RaitingItem 
+                    icon = {star}
+                    raiting = {raitingReBooks}
+                    count = {countReBoks}
+                />
+            }
+            {
+                raitingLiveLib &&
+                <RaitingItem 
+                    icon = {liveLib}
+                    raiting = {raitingLiveLib}
+                    count = {countLiveLib}
+                />
+            }
         </Wrapper>
     )
 }

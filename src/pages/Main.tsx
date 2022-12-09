@@ -10,16 +10,17 @@ import { Recommendation } from "components/pages/main/Recommendation";
 import { ContainerContent } from "components/common/styled";
 
 export const Main: React.FC = () => {
-    const {list, loading} = useAppSelector((state) => state.bestsellers)
+    const {list} = useAppSelector((state) => state.bestsellers)
 
     const dispatch = useAppDispatch();
     
     useEffect(() => {
         dispatch(getBestsellers())
+        window.scrollTo(0, 0);
         document.title = "Главная"
     }, [])
     
-    return(
+    return (
         <ContainerContent>
             <MainSection 
                 mainBestseller = {list.length != 0 ? list[0].imgUrlFront : ""}

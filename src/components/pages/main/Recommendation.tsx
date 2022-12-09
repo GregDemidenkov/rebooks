@@ -4,35 +4,48 @@ import { useAppDispatch, useAppSelector } from "redux/store"
 import { getRecommendation } from "redux/books/recommendationSlice"; 
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { Container } from "components/common/styled"
-import { flex } from "components/common/styled"
-import { Label } from "components/common/styled";
+import { theme, Container, flex, Label } from "components/common/styled";
 
 import { BookCart } from "./BookCart";
 
 const Section = styled.section`
-    padding: 20px 0 80px;
+    padding: 40px 0;
 `
 
 const SectionContent = styled.section`
     ${flex};
     justify-content: space-around;
+    @media(max-width: 700px) {
+        flex-direction: column;
+    }
 `
 
 const RecommendationText = styled.div`
     width: 60%;
+    @media(max-width: 700px) {
+        width: 100%;
+        margin-top: 20px;
+    }
 `
 
 const Text = styled.p`
     margin: 20px 0;
     line-height: 32px;
     font-size: 24px;
+    text-align: justify;
     color: ${theme.brown};
+    @media(max-width: 1300px) {
+        line-height: 24px;
+        font-size: 14px;
+    }
+    @media(max-width: 1000px) {
+        line-height: 18px;
+        font-size: 10px;
+    }
 `
 
 export const Recommendation: React.FC = () => {
-    const {book, loading} = useAppSelector((state) => state.recommendation)
+    const {book} = useAppSelector((state) => state.recommendation)
 
     const dispatch = useAppDispatch();
     
@@ -46,11 +59,9 @@ export const Recommendation: React.FC = () => {
                 <Label>Рекомендация сайта</Label>
                 <SectionContent>
                     <BookCart 
-                        margin = "0"
-                        width = "320px"
-                        height = "500px"
                         url = {book != null ? book.imgUrlFront : ""}
                         id = {book != null ? book.id : 0}
+                        type = {"recommendation"}
                     />
                     <RecommendationText>
                         <Text>Сюжет начинается с убийства. Известно кто убит, каким образом и, главное, кем. Дальнейшее повествование — это взгляд в прошлое, цепь событий, приведших к убийству, а также его неминуемые последствия.</Text>

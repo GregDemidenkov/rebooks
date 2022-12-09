@@ -2,11 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import styled from 'styled-components'
-import { theme, flex, ButtonBuy } from 'components/common/styled'
+import { theme, flex } from 'components/common/styled'
 
-import { Book } from 'redux/books/types'
+import { Book } from 'redux/types'
 
 import { FavoriteIcon } from 'components/ui/FavoriteIcon'
+import { BuyButton } from 'components/ui/BuyButton'
 
 type BookCartType = {
     book: Book
@@ -34,6 +35,7 @@ const BookImg = styled(NavLink)`
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 2px;
+    box-shadow: 2px 2px 2px 0px #6b471c50;
     @media(max-width: 1300px) {
         width: 120px;
         height: 185px;
@@ -124,22 +126,16 @@ const Buttons = styled.div`
 
 export const BookCart: React.FC<BookCartType> = ({book}) => {
     
-    const curentPrice = book.info.discount 
-    ? Math.trunc(book.info.price * (100 - book.info.discount) / 100)
-    : book.info.price
-
     return (
         <Cart>
-            {/* <NavLink to = {`/book/${book.id}`} id = {Number(book.id)}> */}
-                <BookImg to = {`/book/${book.id}`} id = {book.id} src = {book.imgUrlFront}/>
-            {/* </NavLink> */}
+            <BookImg to = {`/book/${book.id}`} id = {book.id} src = {book.imgUrlFront}/>
             <PriceBlock>
                 {
                     book.info.discount &&
                     <OriginalPrice>{book.info.price} ₽</OriginalPrice>
                 }
                 <CurentPriceBlock>
-                    <CurentPrice>{curentPrice} ₽</CurentPrice>
+                    <CurentPrice>{book.info.currentPrice} ₽</CurentPrice>
                     {
                         book.info.discount &&
                         <Discount>- {book.info.discount}%</Discount>
@@ -149,10 +145,12 @@ export const BookCart: React.FC<BookCartType> = ({book}) => {
             <BookName to = {`/book/${book.id}`} id = {book.id}>{book.name}</BookName>
             <Author>{book.author}</Author>
             <Buttons>
-                <ButtonBuy
-                    bookCart>
+                <BuyButton
+                    style = "bookCart"
+                    disabled = {false}
+                    book = {book}>
                     Добавить в корзину
-                </ButtonBuy>
+                </BuyButton>
                 <FavoriteIcon 
                     width = "22px"
                     height = "22px"

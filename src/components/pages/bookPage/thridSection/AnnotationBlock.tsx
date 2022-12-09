@@ -3,7 +3,7 @@ import React from "react";
 import styled from 'styled-components'
 import { theme } from "components/common/styled";
 
-import { content } from "redux/books/types";
+import { content } from "redux/types";
 
 import { QuotesBlock } from './QuotesBlock'
 
@@ -28,6 +28,7 @@ const AnnotationText = styled.p`
     color: ${theme.brown};
     max-width: 800px;
     line-height: 26px;
+    text-align: justify;
 `
 
 export const AnnotationBlock: React.FC<AnnotationBlockType> = ({content}) => {

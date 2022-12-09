@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useAppSelector } from "redux/store"
 
 import styled from 'styled-components'
@@ -21,20 +22,17 @@ const DropdownContent = styled.ul`
     display: none;
     position: absolute;
     top: 40px;
-    width: 200px;
-    background-color: #F5EDE0;
+    width: 198px;
+    background-color: ${theme.beige}80;
+    backdrop-filter: blur(5px);
     border-radius: 0 0 5px 5px;
+    border: 1px solid ${theme.brown}20;
     line-height: 1.7em;
     z-index: 1;
     @media(max-width: 1300px) {
-        width: 150px;
-        top: 23px;
+        width: 148px;
+        top: 29px;
     }
-`
-
-const DropdownMenu = styled.div`
-    position: relative;
-    :hover ${DropdownContent} {display: block;}
 `
 
 const SortButton = styled.button`
@@ -43,11 +41,14 @@ const SortButton = styled.button`
     align-items: center;
     width: 200px;
     padding: 6px 10px;
-    border: none;
+    border: 1px solid ${theme.brown}20;
     border-radius: 5px;
-    background-color: #F5EDE0;
+    background-color:  ${theme.beige}40;
     cursor: pointer;
     font-size: 14px;
+    :focus {
+        border: 1px solid ${theme.brown}20;
+    }
     @media(max-width: 1300px) {
         width: 150px;
         padding: 5px 10px;
@@ -59,6 +60,12 @@ const SortButton = styled.button`
     }
 `
 
+const DropdownMenu = styled.div`
+    position: relative;
+    :hover ${DropdownContent} {display: block;};
+    :hover ${SortButton} {border-radius: 5px 5px 0 0;};
+`
+
 const CurentItem = styled.p`
     color: ${theme.brown};
 `
@@ -66,17 +73,21 @@ const CurentItem = styled.p`
 const DropdownItem = styled.li`
     cursor: pointer;
     padding: 5px 10px;
+    width: 178px;
+    height: 30px;
     color: ${theme.brown};
     ${(props: {active: boolean}) => props.active &&`
         color: ${theme.orange};
     `}  
     :last-child {
         border-radius: 0 0 5px 5px;
+        height: 31px;
     }
     :hover {
-        background-color: ${theme.orange}40;
+        background-color: ${theme.gray}20;
     }
     @media(max-width: 1300px) {
+        width: 128.5px;
         padding: 0 10px;
     }
 `
@@ -110,8 +121,11 @@ export const Sort: React.FC<SortType> = ({onChangeSort}) => {
                 <DropdownContent>
                     {
                         sortList.map(obj => 
-                            <DropdownItem key = {obj.id} active = {obj.label === sort ? true : false}  onClick = {() => onChangeSort(obj.label)}>
-                                <ItemName>{obj.label}</ItemName>
+                            <DropdownItem 
+                                key = {obj.id} 
+                                active = {obj.label === sort ? true : false}  
+                                onClick = {() => onChangeSort(obj.label)}>
+                                    <ItemName>{obj.label}</ItemName>
                             </DropdownItem>
                         )
                     }

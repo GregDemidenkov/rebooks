@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { flex } from "components/common/styled";
+import { theme, flex } from "components/common/styled";
 
 import { ImgPanel } from "components/pages/bookPage/secondSection/ImgPanel";
 

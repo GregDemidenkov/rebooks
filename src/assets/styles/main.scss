@@ -1,20 +1,15 @@
-/* полоса прокрутки (скроллбар) */
 body::-webkit-scrollbar {
     background-color: #F8F3ED;
 }
 
-/* ползунок скроллбара */
 body::-webkit-scrollbar-thumb {
     background-color: #6b471c80;
     border-radius: 6px;
-    // box-shadow: inset 1px 1px 10px gray;
 }
 
 body::-webkit-scrollbar-thumb:hover {
     background-color: #6b471c99;
 }
-
-/* Стрелки */
 
 body::-webkit-scrollbar-button:vertical:start:decrement {
     background: linear-gradient(120deg, #F8F3ED 40%, rgba(0, 0, 0, 0) 41%),

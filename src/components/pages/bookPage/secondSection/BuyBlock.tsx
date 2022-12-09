@@ -1,17 +1,19 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme, flex, ButtonBuy } from "components/common/styled";
+import { theme, flex } from "components/common/styled";
 
-import { price } from 'redux/books/types'
+import { Book, price } from 'redux/types'
 
 import checkMark from 'assets/img/checkMark.svg'
 import cross from 'assets/img/cross.svg'
 
 import { FavoriteIcon } from 'components/ui/FavoriteIcon'
+import { BuyButton } from 'components/ui/BuyButton'
 
 type BuyBlockType = {
-    priceObj: price | null
+    priceObj: price,
+    book: Book
 }
 
 const Wrapper = styled.div`
@@ -97,13 +99,8 @@ const FavoriteText = styled.p`
     margin-left: 5px;
 `
 
-export const BuyBlock: React.FC<BuyBlockType> = ({priceObj}) => {
-
-    const curentPrice = priceObj?.discount 
-        ? Math.trunc(priceObj.price * (100 - priceObj.discount) / 100)
-        : priceObj?.price
-
-        
+export const BuyBlock: React.FC<BuyBlockType> = ({book, priceObj}) => {
+ 
     return (
         <Wrapper>
             <PriceCart>
@@ -117,14 +114,19 @@ export const BuyBlock: React.FC<BuyBlockType> = ({priceObj}) => {
                         <OriginalPrice>{priceObj.price} ₽</OriginalPrice>
                     }
                     <CurentPriceBlock>
-                        <CurentPrice>{curentPrice} ₽</CurentPrice>
+                        <CurentPrice>{priceObj?.currentPrice} ₽</CurentPrice>
                         {
                             priceObj?.discount &&
                             <Discount>- {priceObj.discount}%</Discount>
                         }
                     </CurentPriceBlock>
                 </PriceBlock>
-                <ButtonBuy bookPage>Добавить в корзину</ButtonBuy>
+                <BuyButton
+                    style = "bookPage"
+                    disabled = {false}
+                    book = {book}>
+                    Добавить в корзину
+                </BuyButton>
                 <FavoriteBlock>
                     <FavoriteIcon 
                         width = "22px"

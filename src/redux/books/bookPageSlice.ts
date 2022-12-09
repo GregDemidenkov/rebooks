@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "./types"
+import { Book, host } from "../types"
 
 export const getBookById = createAsyncThunk("book/getBookById", async (id: string | undefined) => {
     const response = await fetch(`${host}books?id=${id}`)
@@ -8,12 +8,12 @@ export const getBookById = createAsyncThunk("book/getBookById", async (id: strin
 
 type bookState = {
     book: Book | null,
-    loading: boolean
+    loaded: boolean
 }
 
 const initialState: bookState = {
     book: null,
-    loading: false
+    loaded: false
 }
 
 const bookPageSlice = createSlice({
@@ -26,14 +26,14 @@ const bookPageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getBookById.pending, (state) => {
-            state.loading = true;
+            state.loaded = false;
         });
         builder.addCase(getBookById.fulfilled, (state, action) => {
-            state.loading = false;
+            state.loaded = true;
             state.book = action.payload[0];
         });
         builder.addCase(getBookById.rejected, (state) => {
-            state.loading = false;
+            state.loaded = false;
         });
     }
 });

@@ -1,11 +1,11 @@
 import React from "react";
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
+
 import { Wrapper, Label } from "./AnnotationBlock";
 import { RowEl, Parametr } from "../secondSection/InfoBlock";
 
-import { characteristics } from "redux/books/types";
+import { characteristics } from "redux/types";
 
 type CharacteristicsBlockType = {
     characteristics: characteristics | null,

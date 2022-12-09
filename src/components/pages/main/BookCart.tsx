@@ -6,13 +6,16 @@ import styled from 'styled-components'
 type BestsellerType = {
     url: string,
     id: number,
-    margin: string,
-    width: string,
-    height: string
+    type: string
 }
 
-const Card = styled(Link)`
-    margin: ${(props: any) => props.margin};    
+const Card = styled(Link)` 
+    ${(props: {type: string}) => props.type == "bestseller" &&`
+        margin: 35px 0 10px;
+    `}
+    ${(props: {type: string}) => props.type == "recommendation" &&`
+        margin: 0;
+    `}  
     box-shadow: 0px 30px 27px -11px rgba(107, 71, 28, 0.83);
 `
 
@@ -22,16 +25,34 @@ const CardCover = styled.div`
     position: relative;
 `
 const Cover = styled.img`
-    width: ${(props: any) => props.width};  
-    height: ${(props: any) => props.height};  
-    z-index: 20;
+    ${(props: {type: string}) => props.type == "bestseller" &&`
+        width: 200px;
+        height: 300px;
+        z-index: 20;
+        @media(max-width: 1000px) {
+            width: 150px;
+            height: 230px;
+        }
+    `}
+    ${(props: {type: string}) => props.type == "recommendation" &&`
+        width: 330px;
+        height: 500px;
+        @media(max-width: 1300px) {
+            width: 220px;
+            height: 330px;
+        }
+        @media(max-width: 1000px) {
+            width: 170px;
+            height: 260px;
+        }
+    `}
 `
 
-export const BookCart: React.FC<BestsellerType> = ({url, id, margin, width, height}) => {    
+export const BookCart: React.FC<BestsellerType> = ({url, id, type}) => {    
     return (
-       <Card to = {`book/${id}`} id = {id} margin = {margin}>
+       <Card to = {`/book/${id}`} id = {id} type = {type}>
             <CardCover>
-                <Cover width = {width} height = {height} src = {url} alt = "обложка книги"/>
+                <Cover type = {type} src = {url} alt = "обложка книги"/>
             </CardCover>
        </Card>
     )

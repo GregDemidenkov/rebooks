@@ -1,9 +1,7 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { Container } from "components/common/styled"
-import { Label } from "components/common/styled";
+import { theme, Container, Label } from "components/common/styled";
 
 import Slider from "react-slick";
 import { sliderSetting } from './slider-settings';
@@ -12,19 +10,22 @@ import polka from 'assets/img/polka.png'
 
 import { BookCart } from "./BookCart";
 
-import { Book } from "redux/books/types";
+import { Book } from "redux/types";
 
 type BestsellerSliderType = {
     bestBooks: Book[]
 }
 
 const Section = styled.section`
-    padding: 100px 0 100px; 
+    padding: 60px 0; 
     border-top: 1px solid ${theme.brown}23;
     background-image: url(${polka});
     background-repeat: no-repeat;
-    background-position: center 120px;
+    background-position: center 70px;
     background-size: 1000% 700px;
+    @media(max-width: 1000px) {
+        background-position: center -30px;
+    }
 `
 
 const SliderContainer = styled.div`
@@ -43,9 +44,7 @@ export const BestsellerSlider: React.FC<BestsellerSliderType> = ({bestBooks}) =>
                             bestBooks.map( (obj) => (
                                 <BookCart 
                                     key = {obj.id} 
-                                    margin = "20px 0 10px" 
-                                    width = "220px"
-                                    height = "330px"
+                                    type = {"bestseller"}
                                     url = {obj.imgUrlFront}
                                     id = {obj.id}
                                 />

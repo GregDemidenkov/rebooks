@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "./types"
+import { Book, host } from "../types"
 
 type getBooksType = {
     category: String,
-    sort: String
+    sort: String,
+    page: number
 }
 
 const getFilterBySort = (sort: String) => {
     switch (sort) {
         case "Сначала дешевые":
-            return "&_sort=info.price&_order=asc"
+            return "&_sort=info.currentPrice&_order=asc"
         case "Сначала дорогие":
-            return "&_sort=info.price&_order=desc"
+            return "&_sort=info.currentPrice&_order=desc"
         case "Сначала новые":
             return "&_sort=characteristics.year&_order=desc"   
         default:
@@ -19,11 +20,12 @@ const getFilterBySort = (sort: String) => {
     }
 }
 
-export const getBooks = createAsyncThunk<Book[], getBooksType>("books/getBooks", async ({category, sort}) => {
-    const filterByCategory = category === "Все категории" ? "?" : `?characteristics.genre=${category}`;
+export const getBooks = createAsyncThunk<Book[], getBooksType>("books/getBooks", async ({category, sort, page}) => {
+    const filterByCategory: String = category === "Все категории" ? "?" : `?characteristics.genre=${category}`;
     const filterBySort = getFilterBySort(sort)
+    const filterByPage = category === "Все категории" ? `&_limit=18&_page=${page}` : ""    
     
-    return fetch(`${host}books${filterByCategory}${filterBySort}`)
+    return fetch(`${host}books${filterByCategory}${filterBySort}${filterByPage}`)
     .then((res) => 
         res.json()
     )
@@ -33,14 +35,16 @@ type bookState = {
     list: Book[],
     category: String,
     sort: String,
-    loading: boolean
+    page: number,
+    loaded: boolean
 }
 
 const initialState: bookState = {
     list: [],
     category: "Все категории",
     sort: "Сначала популярные",
-    loading: false
+    page: 1,
+    loaded: false
 }
 
 const booksSlice = createSlice({
@@ -55,22 +59,25 @@ const booksSlice = createSlice({
         },
         setSort(state, action: PayloadAction<String>) {
             state.sort = action.payload;
+        },
+        setPage(state, action: PayloadAction<number>) {
+            state.page = action.payload;
         }
     },
     extraReducers: (builder) => {
         builder.addCase(getBooks.pending, (state) => {
-            state.loading = true;
+            state.loaded = false;
         });
         builder.addCase(getBooks.fulfilled, (state, action) => {
-            state.loading = false;
+            state.loaded = true;
             state.list = action.payload;
         });
         builder.addCase(getBooks.rejected, (state) => {
-            state.loading = false;
+            state.loaded = false;
         });
     }
 });
 
-export const { setCategory, setSort } = booksSlice.actions;
+export const { setCategory, setSort, setPage } = booksSlice.actions;
 
 export default booksSlice.reducer

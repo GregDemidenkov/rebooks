@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "./types"
+import { Book, host } from "../types"
 
 export const getBestsellers = createAsyncThunk<Book[]>("bestsellers/getBestsellers", async () => {
     return fetch(`${host}books?_sort=raiting.countBuy&_order=desc&_limit=10`)
@@ -10,12 +10,12 @@ export const getBestsellers = createAsyncThunk<Book[]>("bestsellers/getBestselle
 
 type bestsellersState = {
     list: Book[],
-    loading: boolean
+    loaded: boolean
 }
 
 const initialState: bestsellersState = {
     list: [],
-    loading: false
+    loaded: false
 }
 
 const bestsellersSlice = createSlice({
@@ -28,14 +28,14 @@ const bestsellersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getBestsellers.pending, (state) => {
-            state.loading = true;
+            state.loaded = false;
         });
         builder.addCase(getBestsellers.fulfilled, (state, action) => {
-            state.loading = false;
+            state.loaded = true;
             state.list = action.payload;
         });
         builder.addCase(getBestsellers.rejected, (state) => {
-            state.loading = false;
+            state.loaded = false;
         });
     }
 });

@@ -2,9 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled"
-import { Container } from "components/common/styled"
-import { flex } from "components/common/styled"
+import { theme, Container, flex } from "components/common/styled"
 
 import booksBack from 'assets/img/booksBack.png'
 
@@ -15,10 +13,6 @@ type MainSectionType = {
 
 const Section = styled.section`
     padding: 160px 0 0;
-    background-image: url(${booksBack});
-    background-repeat: no-repeat;
-    background-position: 0 100px;
-    background-size: 40%;
     @media(max-width: 1300px) {
         background-position: 0 75px;
     }
@@ -41,13 +35,15 @@ const Slogan = styled.h2`
     text-align: center;
     font-size: 52px;
     color: ${theme.brown};
-    text-shadow: 1px 1px 1px black;
+    span {
+        color: ${theme.orange};
+    }
 `
 
 const Text = styled.p`
     font-size: 24px;
-    color: ${theme.beige};
-    background-color: ${theme.brown};
+    color: ${theme.orange};
+    // background-color: ${theme.brown};
     padding: 8px 10px;
     border-radius: 7px;
 `
@@ -74,6 +70,7 @@ const Img = styled.img`
     width: 100%;
     height: auto;
     box-shadow: 0px 35px 44px -11px rgba(107, 71, 28, 0.83);
+    border-radius: 8px;
 `
 
 export const MainSection: React.FC<MainSectionType> = ({mainBestseller, id}) => {
@@ -83,7 +80,7 @@ export const MainSection: React.FC<MainSectionType> = ({mainBestseller, id}) => 
             <Container>
                 <SectionContent>
                     <Info>
-                        <Slogan>ReBooks — лучший интернет-магазин книг в России</Slogan>
+                        <Slogan><span>ReBooks</span> — лучший интернет-магазин книг в России</Slogan>
                         <Text>Мировые авторы, лучшие редакции и низкие цены <span>только у нас!</span></Text>
                     </Info>
                     <Bestseller to = {`book/${id}`} id = {id}>

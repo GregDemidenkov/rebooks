@@ -2,8 +2,7 @@ import React, {useEffect} from "react"
 import { useParams } from "react-router-dom";
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled";
-import { Container, ContainerContent } from "components/common/styled";
+import { theme, Container, ContainerContent } from "components/common/styled";
 
 import { useAppDispatch, useAppSelector } from "redux/store"
 import { getBookById } from "redux/books/bookPageSlice"
@@ -41,20 +40,20 @@ const ThridSection = styled.section`
 
 export const BookPage: React.FC = () => {    
     
-    const { id } = useParams<{id?: string}>()
+    const { id } = useParams()
 
-    const {book, loading} = useAppSelector((state) => state.book)
+    const {book, loaded} = useAppSelector((state) => state.book)
 
     const dispatch = useAppDispatch()
     
     useEffect(() => {
         dispatch(getBookById(id))
         window.scrollTo(0, 0);
-    }, [])
+    }, [id])
     
     useEffect(() => {
         document.title = `${book?.name !== undefined ? book?.name : "Книга"}, ${book?.author !== undefined ? book?.author : "Автор"}`
-    }, [loading])
+    }, [loaded])
 
     return (
        <Container>
@@ -64,11 +63,11 @@ export const BookPage: React.FC = () => {
                     {
                         book &&
                         <RaitingLine 
-                            raitingReBooks = {book.raiting.raitingReBooks || 0}
-                            countReBoks= {book.raiting.countReBoks || 0}
-                            raitingLiveLib= {book.raiting.raitingLiveLib || 0}
-                            countLiveLib= {book.raiting.countLiveLib || 0}
-                            countBuy = {book.raiting.countBuy || 0} 
+                            raitingReBooks = {book.raiting.raitingReBooks}
+                            countReBoks= {book.raiting.countReBoks}
+                            raitingLiveLib= {book.raiting.raitingLiveLib}
+                            countLiveLib= {book.raiting.countLiveLib}
+                            countBuy = {book.raiting.countBuy} 
                         />
                     }
                 </FirstSection>
@@ -82,7 +81,10 @@ export const BookPage: React.FC = () => {
                         characteristicsObj = {book ? book.characteristics || null : null}
                         author = {book ? book.author || "" : ""}
                     />
-                    <BuyBlock priceObj = {book ? book.info || null : null}/>
+                    {
+                        book &&
+                        <BuyBlock book = {book} priceObj = {book.info}/>
+                    }
                 </SecondSection>
                 <ThridSection>
                     <AnnotationBlock 

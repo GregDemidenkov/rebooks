@@ -1,9 +1,7 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled"
-import { flex } from "components/common/styled"
-
+import { theme, flex } from "components/common/styled"
 
 type RaitingItemType = {
     icon: any,

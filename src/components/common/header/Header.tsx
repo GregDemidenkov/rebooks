@@ -1,16 +1,16 @@
-import React from "react"
-import { NavLink} from 'react-router-dom'
+import React, {useState, useCallback} from "react"
+import { NavLink } from 'react-router-dom'
+import debounce from 'lodash.debounce'
 
 import styled from 'styled-components'
-import { theme } from "./styled"
-import { flex } from "./styled";
-import { Container } from "./styled";
+import { theme, flex, Container } from "../styled"
 
 import logoSvg from 'assets/img/logo.svg';
-import search from 'assets/img/search.svg'
 
 import { FavoriteIcon } from "components/ui/FavoriteIcon";
 import { CartIcon } from "components/ui/CartIcon";
+
+import { Search } from "./Search"
 
 const HeaderStyled = styled.header`
     background-color: ${theme.beige};
@@ -18,6 +18,7 @@ const HeaderStyled = styled.header`
     width: 100%;
     top: 0;
     z-index: 100;
+    box-shadow: 0px 2px 4px 0px #6b471c30;
 `
 
 const HeaderContent = styled.div`
@@ -34,47 +35,11 @@ const Icon = styled.img`
 
 const StoreName = styled.h1`
     font-size: 36px;
-    color: ${theme.brown};
+    color: ${theme.orange};
     margin-right: 20px;
     @media(max-width: 1300px) {
         font-size: 22px;
     }
-`
-
-const Search = styled.div`
-    ${flex}
-    width: 50%;
-`
-
-const SearchInput = styled.input`
-    width: 85%;
-    height: 30px;
-    outline: none;
-    padding: 0 30px 0;
-    font-size: 16px;
-    color: ${theme.brown};
-    border: 1px solid ${theme.brown}20;
-    border-radius: 8px;
-    background-color: #F8F3ED;
-    background-image: url(${search});
-    background-repeat: no-repeat;
-    background-position: 2px 4px;
-    background-size: 20px;
-    ::placeholder {
-        color: ${theme.brown}99;
-    }
-    @media(max-width: 1300px) {
-        height: 25px;
-    }
-`
-
-const Button = styled.button`
-    width: 15%;
-    height: 32px;
-    background-color: ${theme.brown};
-    color: ${theme.beige};
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
 `
 
 const Nav = styled.nav`
@@ -83,12 +48,12 @@ const Nav = styled.nav`
         width: 600px;
         margin: 0 auto 9px;
         .active {
-            background-color: ${theme.brown};
-            color: ${theme.beige};
+            outline: 1px solid ${theme.orange};
+            color: ${theme.orange};
         }
     `}
     ${(props: {personalPages: boolean}) => props.personalPages &&`
-        margin: 0 20px 0;
+        margin: 0 0 0 20px;
         width: 80px;
         @media(max-width: 1300px) {
             width: 60px;
@@ -108,11 +73,10 @@ const NavLinkStyled = styled(NavLink)`
         padding: 8px 0;
         border-radius: 30px;
         :hover {
-            background-color: ${theme.brown}90;
-            color: ${theme.beige};
+            outline: 1px solid ${theme.orange}90  ;
         }
         @media(max-width: 1300px) {
-            width: 100px;
+            width: 120px;
             padding: 4px 0;
         }
     `}
@@ -131,10 +95,7 @@ export const Header: React.FC = () => {
                         />
                         <StoreName>ReBooks</StoreName>
                     </NavLinkStyled>
-                    <Search>
-                        <SearchInput placeholder = "Поиск книг, авторов"></SearchInput>
-                        {/* <Button>Найти</Button> */}
-                    </Search>
+                    <Search></Search>
                     <Nav personalPages>
                         <NavLinkStyled to = "/favorite">
                             <FavoriteIcon
@@ -147,7 +108,7 @@ export const Header: React.FC = () => {
                             <CartIcon 
                                 width = "28px"
                                 height = "28px"
-                                fill = {theme.brown}
+                                fill = {theme.orange}
                             />
                         </NavLinkStyled>
                     </Nav>
