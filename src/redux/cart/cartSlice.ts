@@ -1,19 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { calcTotalPrice, calcTotalCount } from './utils/cartFunctions'
+import { calcTotalPrice, calcTotalCurrentPrice, calcTotalWeight } from './utils/cartFunctions'
 
 import { BookInCart } from 'redux/types'
 
 type cartState = {
     items: BookInCart[],
     totalCount: number,
-    totalPrice: number
+    totalWeight: number,
+    totalPrice: number,
+    totalCurrentPrice: number
 }
 
 const initialState: cartState = {
     items: [],
     totalCount: 0,
-    totalPrice: 0
+    totalWeight: 0,
+    totalPrice: 0,
+    totalCurrentPrice: 0
 }
 
 const cartSlice = createSlice({
@@ -29,8 +33,42 @@ const cartSlice = createSlice({
         state.items.push({...action.payload})
       }
 
+      state.totalCount = state.items.length
+      state.totalWeight = calcTotalWeight(state.items)
       state.totalPrice = calcTotalPrice(state.items)
-      state.totalCount = calcTotalCount(state.items)
+      state.totalCurrentPrice = calcTotalCurrentPrice(state.items)
+
+    },
+    minusItem(state, action: PayloadAction<number>) {
+      const foundItem = state.items.find((obj) => obj.id === action.payload);
+      if (foundItem) {
+        if (foundItem.count !== 1) {
+            foundItem.count--;
+        } else {
+          const index = state.items.indexOf(foundItem)
+          state.items.splice(index, 1)
+        }
+      }
+
+      state.totalCount = state.items.length
+      state.totalWeight = calcTotalWeight(state.items)
+      state.totalPrice = calcTotalPrice(state.items)
+      state.totalCurrentPrice = calcTotalCurrentPrice(state.items)
+
+    },
+    deleteItem(state, action: PayloadAction<number>) {
+      const foundItem = state.items.find((obj) => obj.id === action.payload);
+
+      if (foundItem) {
+          const index = state.items.indexOf(foundItem)
+          state.items.splice(index, 1)
+      }
+
+      state.totalCount = state.items.length
+      state.totalWeight = calcTotalWeight(state.items)
+      state.totalPrice = calcTotalPrice(state.items)
+      state.totalCurrentPrice = calcTotalCurrentPrice(state.items)
+
     },
     clearCart(state) {
         state.items = []
@@ -40,6 +78,6 @@ const cartSlice = createSlice({
   }
 })
 
-export const { addItem } = cartSlice.actions
+export const { addItem, minusItem, deleteItem, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

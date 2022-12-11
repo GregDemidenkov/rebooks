@@ -68,5 +68,6 @@ export type BookInCart = {
     price: number,
     discount: number | null,
     currentPrice: number,
+    weight: number,
     count: number
 }

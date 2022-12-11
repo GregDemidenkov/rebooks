@@ -21,11 +21,7 @@ const initialState: authorsState = {
 const authorsSlice = createSlice({
     name: "authors",
     initialState,
-    reducers: {
-        // getAuthorsList(state, action: PayloadAction<Author[]>) {
-        //     state.authors = action.payload;
-        // }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getAuthors.pending, (state) => {
             state.loaded = false;

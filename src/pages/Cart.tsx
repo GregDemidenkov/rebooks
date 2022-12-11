@@ -8,7 +8,7 @@ import { CartEmpty } from "components/pages/cart/CartEmpty"
 import { Container, ContainerContent, PageName } from "components/common/styled"
 
 export const Cart: React.FC = () => {
-    const {items, totalPrice, totalCount} = useAppSelector((state) => state.cart)
+    const {items, totalCount, totalWeight, totalPrice, totalCurrentPrice} = useAppSelector((state) => state.cart)
     
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -21,7 +21,7 @@ export const Cart: React.FC = () => {
                 <PageName>Корзина</PageName>
                 {
                     totalCount 
-                    ? <CartFull books = {items}/> 
+                    ? <CartFull books = {items} total = {{count: totalCount, weight: totalWeight, price: totalPrice, currentPrice: totalCurrentPrice}}/> 
                     : <CartEmpty />
                 }
             </ContainerContent>

@@ -1,7 +1,14 @@
 import React from "react"
+import { NavLink } from "react-router-dom"
+
+import { useAppDispatch, useAppSelector } from "redux/store"
+import { minusItem, addItem, deleteItem } from "redux/cart/cartSlice"
 
 import styled from 'styled-components'
 import { flex, theme } from "components/common/styled"
+
+import deleteSvg from "assets/img/delete.svg"
+import { FavoriteIcon } from "components/ui/FavoriteIcon"
 
 import { BookInCart } from "redux/types"
 
@@ -11,27 +18,46 @@ type CartItemType = {
 
 const Wrapper = styled.div`
     ${flex};
-    border-bottom: 1px solid ${theme.gray}20;
+    border-top: 1px solid ${theme.gray}20;
     margin: 5px 0;
-    padding: 10px 0;
+    padding: 10px 0 20px;
+    :last-child {
+        border-bottom: 1px solid ${theme.gray}20;
+    }
 `
 
-const Sector = styled.div`
+const InfoBlock = styled.div`
     ${flex};
     align-items: flex-start;
     justify-content: flex-start;
     height: 130px;
 `
 
-const BookImg = styled.img`
-    width: 90px;
+const ActionBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 130px;
+`
+
+const Block = styled.div`
+    ${flex};
+    align-items: flex-start;
+`
+
+const BookImg = styled(NavLink)`
+    width: 90px;
+    height: 135px;
+    background-image: url(${(props: {src: String}) => props.src});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     margin-right: 10px;
     border-radius: 2px;
     box-shadow: 2px 2px 2px 0px #6b471c50;
 `
 
-const NameAndAuthor = styled.p`
+const NameAndAuthor = styled(NavLink)`
     width: 300px;
     color: ${theme.brown};
     span {
@@ -42,7 +68,7 @@ const NameAndAuthor = styled.p`
 
 const Counter = styled.div`
     width: 120px;
-    margin-right: 40px;
+    margin-right: 10px;
 `
 
 const ButtonMinus = styled.button`
@@ -81,28 +107,86 @@ const InputCount = styled.input`
     color: ${theme.brown}
 `
 
-const Price = styled.p`
+const PriceBlock = styled.div`
+    text-align: right;
+    width: 120px;
+
+`
+
+const CurrentPrice = styled.p`
+    font-size: 16px;
     line-height: 28px;
     color: ${theme.brown};
+    font-weight: 800;
+`
+
+const Price = styled.p`
+    color: ${theme.gray}90;
+    text-decoration: line-through;
+    font-size: 14px;
+`
+
+const Economy = styled.p`
+    font-size: 14px;
+    color: ${theme.orange}90;
+`
+
+const ActionButton = styled.div`
+    ${flex};
+    cursor: pointer;
+
+`
+
+const ButtonImg = styled.img`
+    width: 15px;
+    height: auto;
+`
+
+const ButtonLabel = styled.a`
+    color: ${theme.gray};
+    margin-left: 2px;
 `
 
 
 export const CartItem: React.FC<CartItemType> = ({book}) => {
     
+    const dispatch = useAppDispatch();
+
     return(
         <Wrapper>
-            <Sector>
-                <BookImg src={book.img} alt="" />
-                <NameAndAuthor>{book.name}<br/><span>{book.author}</span></NameAndAuthor>
-            </Sector>
-            <Sector>
-                <Counter>
-                    <ButtonMinus>-</ButtonMinus>
-                    <InputCount value = {book.count}/>
-                    <ButtonPlus>+</ButtonPlus>
-                </Counter>
-                <Price>{book.currentPrice*book.count} ₽</Price>
-            </Sector>
+            <InfoBlock>
+                <BookImg to = {`/book/${book.id}`} id = {book.id} src={book.img} />
+                <NameAndAuthor to = {`/book/${book.id}`} id = {book.id}>{book.name}<br/><span>{book.author}</span></NameAndAuthor>
+            </InfoBlock>
+            <ActionBlock>
+                <Block>
+                    <Counter>
+                        <ButtonMinus onClick = {() => dispatch(minusItem(book.id))}>-</ButtonMinus>
+                        <InputCount value = {book.count}/>
+                        <ButtonPlus onClick = {() => dispatch(addItem(book))}>+</ButtonPlus>
+                    </Counter>
+                    <PriceBlock>
+                        <CurrentPrice>{book.currentPrice*book.count} ₽</CurrentPrice>
+                        {
+                            book.discount &&
+                            <>
+                                <Price>{book.price*book.count} ₽</Price>
+                                <Economy>Экономия {book.price*book.count - book.currentPrice*book.count} ₽</Economy>
+                            </>
+                        }
+                    </PriceBlock>
+                </Block>
+                <Block>
+                    <ActionButton>
+                        <FavoriteIcon width = "15px" height = "auto"/>
+                        <ButtonLabel>Отложить</ButtonLabel>
+                    </ActionButton>
+                    <ActionButton onClick = {() => dispatch(deleteItem(book.id))}>
+                        <ButtonImg src = {deleteSvg}></ButtonImg>
+                        <ButtonLabel>Удалить</ButtonLabel>
+                    </ActionButton>
+                </Block>
+            </ActionBlock>
         </Wrapper>
     )
 }

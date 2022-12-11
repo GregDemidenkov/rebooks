@@ -19,6 +19,7 @@ const SearchDropdown = styled.div`
     border-radius: 2px 2px 8px 8px;
     top: 30px;
     box-shadow: 0px 2px 4px 0px #6b471c30;
+    z-index: 1000;
 `
 
 const SearchWrapper = styled.div`
@@ -80,6 +81,7 @@ const Price = styled.p`
 const Unfinded = styled.p`
     margin: 10px;
     text-align: center;
+    color: ${theme.brown};
 `
 
 export const Search: React.FC = () => {

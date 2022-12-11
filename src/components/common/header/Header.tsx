@@ -1,6 +1,7 @@
-import React, {useState, useCallback} from "react"
+import React from "react"
 import { NavLink } from 'react-router-dom'
-import debounce from 'lodash.debounce'
+
+import { useAppSelector } from "redux/store"
 
 import styled from 'styled-components'
 import { theme, flex, Container } from "../styled"
@@ -62,6 +63,7 @@ const Nav = styled.nav`
 `
 
 const NavLinkStyled = styled(NavLink)`
+    position: relative;
     ${(props: {logo: boolean}) => props.logo &&`
         ${flex};
     `}
@@ -82,8 +84,37 @@ const NavLinkStyled = styled(NavLink)`
     `}
 `
 
+const CartCountBlock = styled.div`
+    position: absolute;
+    top: 11px;
+    right: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 100%;
+    background-color: ${theme.orange};
+    text-align: center;
+    @media(max-width: 1300px) {
+        top: 8px;
+        right: 1px;
+        width: 9px;
+        height: 9px;
+    }
+`
+
+const CartCount = styled.div`
+    color: ${theme.beige};
+    padding: 1px 0 0 0;
+    font-size: 10px;
+    text-align: center;
+    @media(max-width: 1300px) {
+        font-size: 8px;
+        padding: 0;
+    }
+`
+
 export const Header: React.FC = () => {    
-    
+    const {totalCount} = useAppSelector((state) => state.cart)
+
     return (
         <HeaderStyled>
             <Container>
@@ -110,6 +141,12 @@ export const Header: React.FC = () => {
                                 height = "28px"
                                 fill = {theme.orange}
                             />
+                            {
+                                totalCount !== 0 &&
+                                <CartCountBlock>
+                                    <CartCount>{totalCount}</CartCount>
+                                </CartCountBlock>
+                            }
                         </NavLinkStyled>
                     </Nav>
                 </HeaderContent>

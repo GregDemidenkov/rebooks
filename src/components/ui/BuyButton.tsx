@@ -53,6 +53,7 @@ export const BuyButton: React.FC<BuyButtonType> = ({
         price: book.info.price,
         discount: book.info.discount,
         currentPrice: book.info.currentPrice,
+        weight: book.characteristics.weight,
         count: 1
     }
 

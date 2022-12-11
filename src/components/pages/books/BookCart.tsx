@@ -8,6 +8,7 @@ import { Book } from 'redux/types'
 
 import { FavoriteIcon } from 'components/ui/FavoriteIcon'
 import { BuyButton } from 'components/ui/BuyButton'
+import cross from 'assets/img/cross.svg'
 
 type BookCartType = {
     book: Book
@@ -123,6 +124,25 @@ const Buttons = styled.div`
     width: 100%;
 `
 
+const Stock = styled.div`
+    ${flex}
+    justify-content: flex-start;
+    height: 36px;
+    @media(max-width: 1300px) {
+        height: 26px;
+    }
+`
+const Icon = styled.img`
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+`
+
+const StockInfo = styled.p`
+    font-size: 12px;
+    padding-top: 1px;
+    color: ${theme.gray};
+`
 
 export const BookCart: React.FC<BookCartType> = ({book}) => {
     
@@ -145,12 +165,22 @@ export const BookCart: React.FC<BookCartType> = ({book}) => {
             <BookName to = {`/book/${book.id}`} id = {book.id}>{book.name}</BookName>
             <Author>{book.author}</Author>
             <Buttons>
-                <BuyButton
-                    style = "bookCart"
-                    disabled = {false}
-                    book = {book}>
-                    Добавить в корзину
-                </BuyButton>
+                {
+                    book.info.inStock 
+                    ?
+                    <BuyButton
+                        style = "bookCart"
+                        disabled = {false}
+                        book = {book}>
+                        Добавить в корзину
+                    </BuyButton>
+                    :
+                    <Stock>
+                        <Icon src = {cross} />
+                        <StockInfo>Нет в наличии</StockInfo>
+                    </Stock>
+
+                }
                 <FavoriteIcon 
                     width = "22px"
                     height = "22px"

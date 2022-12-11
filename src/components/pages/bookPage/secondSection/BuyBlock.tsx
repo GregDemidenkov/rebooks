@@ -121,12 +121,15 @@ export const BuyBlock: React.FC<BuyBlockType> = ({book, priceObj}) => {
                         }
                     </CurentPriceBlock>
                 </PriceBlock>
-                <BuyButton
-                    style = "bookPage"
-                    disabled = {false}
-                    book = {book}>
-                    Добавить в корзину
-                </BuyButton>
+                    {
+                        book.info.inStock &&
+                        <BuyButton
+                            style = "bookPage"
+                            disabled = {false}
+                            book = {book}>
+                            Добавить в корзину
+                        </BuyButton>
+                    }
                 <FavoriteBlock>
                     <FavoriteIcon 
                         width = "22px"
