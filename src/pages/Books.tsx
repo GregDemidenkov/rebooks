@@ -61,7 +61,6 @@ export const Books: React.FC = () => {
         navigate(`/books/${foundItem?.url}/page_${page}/sort_${sort}`)
     };
     
-    
     return (
         <Container>
             <ContainerContent>
