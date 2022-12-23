@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { calcTotalPrice, calcTotalCurrentPrice, calcTotalWeight } from './utils/cartFunctions'
 
-import { BookInCart } from 'redux/types'
+import { BookInCart } from 'types'
 
 type cartState = {
     items: BookInCart[],

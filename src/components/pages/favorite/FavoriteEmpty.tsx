@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { theme } from "components/common/styled"
 
-import cartEmpty from 'assets/img/cartEmpty.svg'
+import favoriteEmpty from 'assets/img/favoriteEmpty.svg'
 
 const Wrapper = styled.div`
     display: flex;
@@ -14,19 +14,19 @@ const Wrapper = styled.div`
     margin: 40px 0;
 `
 
-const CartEmptyImg = styled.img`
+const FavoriteEmptyImg = styled.img`
     width: 200px;
     height: auto;
 `
 
-const CartEmptyTitle = styled.h3`
+const FavoriteEmptyTitle = styled.h3`
     font-size: 22px;
     color: ${theme.brown};
     margin-top: 10px;
     text-align: center;
 `
 
-const CartEmptyText = styled.p`
+const FavoriteEmptyText = styled.p`
     font-size: 16px;
     color: ${theme.gray};
     line-height: 28px;
@@ -49,12 +49,12 @@ const ToCatalogButton = styled(NavLink)`
     }
 `
 
-export const CartEmpty: React.FC = () => {
+export const FavoriteEmpty: React.FC = () => {
     return(
         <Wrapper>
-            <CartEmptyImg src = {cartEmpty}/>
-            <CartEmptyTitle>Ваша корзина сейчас пуста</CartEmptyTitle>
-            <CartEmptyText>Воспользуйтесь нашим каталогом, чтобы её заполнить.<br/>У нас всегда есть, что почитать!</CartEmptyText>
+            <FavoriteEmptyImg src = {favoriteEmpty}/>
+            <FavoriteEmptyTitle>Ваш список отложенных товаров сейчас пуст</FavoriteEmptyTitle>
+            <FavoriteEmptyText>Воспользуйтесь нашим каталогом, чтобы его заполнить.<br/>Добавляйте товары в «Отложенные»</FavoriteEmptyText>
             <ToCatalogButton to = "/books/all-categories/page_1/sort_popular">Перейти в каталог</ToCatalogButton>
         </Wrapper>
     )

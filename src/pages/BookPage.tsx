@@ -31,6 +31,11 @@ const HeaderBook = styled.h2`
 
 const SecondSection = styled.section`
     display: flex;
+    @media(max-width: 660px) {
+        flex-wrap: wrap;
+        align-itens: center;
+        justify-content: center;
+    }
 `
 
 const ThridSection = styled.section`

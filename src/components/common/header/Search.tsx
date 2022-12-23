@@ -7,7 +7,7 @@ import { theme, flex} from "../styled"
 
 import search from 'assets/img/search.svg'
 
-import { host, Book } from "redux/types";
+import { host, Book } from "types";
 
 const SearchDropdown = styled.div`   
     position: absolute;
@@ -57,6 +57,9 @@ const FindedBook = styled(NavLink)`
     :hover {
         background-color: ${theme.gray}10;
     }
+    @media(max-width: 700px) {
+        padding: 10px;
+    }
 `
 
 const Img = styled.img`
@@ -64,6 +67,10 @@ const Img = styled.img`
     height: 60px;
     border-radius: 1px;
     margin-right: 10px;
+    @media(max-width: 700px) {
+        width: 30px;
+        height: 45px;
+    }
 `
 
 const Name = styled.p`
@@ -72,16 +79,25 @@ const Name = styled.p`
     span {
         color: ${theme.gray};
     }
+    @media(max-width: 700px) {
+        font-size: 10px;
+    }
 `
 
 const Price = styled.p`
     color: ${theme.orange};
+    @media(max-width: 700px) {
+        font-size: 10px;
+    }
 `
 
 const Unfinded = styled.p`
     margin: 10px;
     text-align: center;
     color: ${theme.brown};
+    @media(max-width: 700px) {
+        font-size: 10px;
+    }
 `
 
 export const Search: React.FC = () => {

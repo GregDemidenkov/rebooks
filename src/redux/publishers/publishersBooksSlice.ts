@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "../types"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { Book, host } from "../../types"
 
 type getPublisherBooksType = {
     publisherName: String
@@ -30,11 +30,7 @@ const initialState: publisherBooksState = {
 const publisherBooksSlice = createSlice({
     name: "publisherBooks",
     initialState,
-    reducers: {
-        // getPublisherBooksList(state, action: PayloadAction<Author[]>) {
-        //     state.PublisherBooks = action.payload;
-        // }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getPublisherBooks.pending, (state) => {
             state.loaded = false;
@@ -50,7 +46,5 @@ const publisherBooksSlice = createSlice({
         });
     }
 });
-
-// export const { getPublisherBooksList } = PublisherBooksSlice.actions;
 
 export default publisherBooksSlice.reducer

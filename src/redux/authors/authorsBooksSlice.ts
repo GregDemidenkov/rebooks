@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "../types"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { Book, host } from "../../types"
 
 type getAuthorsBooksType = {
     name: String

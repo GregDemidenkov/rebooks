@@ -100,13 +100,13 @@ const ItemName = styled.p`
 `
 
 export const Sort: React.FC<SortType> = ({onChangeSort}) => {
-    const {sort} = useAppSelector((state) => state.books)
+    const { sort, category } = useAppSelector((state) => state.books)
     
     return (
         <SortBlock>
             <DropdownMenu>
                 <SortButton>
-                    <CurentItem>{sort}</CurentItem>
+                    <CurentItem>{sortList.find((obj) => obj.url === sort)?.label}</CurentItem>
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                     width="24.000000pt" height="24.000000pt" viewBox="0 0 24.000000 24.000000"
                     preserveAspectRatio="xMidYMid meet">
@@ -123,8 +123,8 @@ export const Sort: React.FC<SortType> = ({onChangeSort}) => {
                         sortList.map(obj => 
                             <DropdownItem 
                                 key = {obj.id} 
-                                active = {obj.label === sort ? true : false}  
-                                onClick = {() => onChangeSort(obj.label)}>
+                                active = {obj.url === sort ? true : false}  
+                                onClick = {() => onChangeSort(obj.url, category)}>
                                     <ItemName>{obj.label}</ItemName>
                             </DropdownItem>
                         )

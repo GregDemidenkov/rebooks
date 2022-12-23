@@ -14,6 +14,9 @@ const ImagesBlockWrapper = styled.div`
     ${flex}
     align-items: flex-start;
     flex-basis: 22%;
+    @media(max-width: 660px) {
+        flex-basis: 0;
+    }
 `
 
 const Cover = styled.img`
@@ -21,6 +24,10 @@ const Cover = styled.img`
     width: 290px;
     box-shadow: 11px 10px 10px -1px ${theme.gray}80;
     border-radius: 3px;
+    @media(max-width: 450px) {
+        height: 400px;
+        width: 240px;
+    }
 `
 
 export const ImagesBlock: React.FC<ImagesBlockType> = ({front, back}) => {

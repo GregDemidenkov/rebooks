@@ -8,7 +8,7 @@ import { BookCart } from "../books/BookCart";
 import styled from 'styled-components'
 import { theme, flex, SectionName, AllBooks } from "components/common/styled";
 
-import { Author } from 'redux/types'
+import { Author } from 'types'
 
 type AuthorSectionType = {
     author: Author,

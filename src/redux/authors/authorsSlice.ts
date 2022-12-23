@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Author, host } from "../types"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { Author, host } from "../../types"
 
 export const getAuthors = createAsyncThunk<Author[]>("authors/getAuthors", async () => {
     return fetch(`${host}authors`)
@@ -35,7 +35,5 @@ const authorsSlice = createSlice({
         });
     }
 });
-
-// export const { getAuthorsList } = authorsSlice.actions;
 
 export default authorsSlice.reducer

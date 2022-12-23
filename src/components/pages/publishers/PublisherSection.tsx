@@ -3,11 +3,10 @@ import React, {useEffect, useState} from "react";
 import { useAppDispatch, useAppSelector } from "redux/store"
 import { getPublisherBooks } from "redux/publishers/publishersBooksSlice"
 
-import { Publisher } from 'redux/types'
+import { Publisher } from 'types'
 
 import styled from 'styled-components'
 import { theme, flex, SectionName, AllBooks } from "components/common/styled";
-import { CharacteristicsBlock } from "../bookPage/thridSection/CharacteristicsBlock";
 import { BookCart } from "../books/BookCart";
 
 type PublisherSectionType = {
@@ -105,7 +104,6 @@ const ShowAllButton = styled.button`
     color: ${theme.orange};
     border: 1px solid ${theme.orange};
     border-radius: 5px;
-    // margin: 0 auto;
     cursor: pointer;
     :hover {
         color: ${theme.orange}99;
@@ -131,14 +129,6 @@ export const PublisherSection: React.FC<PublisherSectionType> = ({publisher, ind
         const publisherName = publisher.name           
         dispatch(getPublisherBooks({publisherName}))
     }, [])
-
-    // useEffect(() => {
-    //     setBooksCount(publisherBooks[index] 
-    //     ? publisherBooks[index].books.length > 7 
-    //         ? 7 
-    //         : publisherBooks[index].books.length 
-    //     : 7)
-    // }, [publisherBooks[index]])
 
     const showAll = () => {
         setBooksCount(publisherBooks[index].books.length);

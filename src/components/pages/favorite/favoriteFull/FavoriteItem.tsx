@@ -2,27 +2,29 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import { useAppDispatch } from "redux/store"
-import { minusItem, addItem, deleteItem } from "redux/cart/cartSlice"
+import { clickItem } from "redux/favorite/favoriteSlice"
 
 import styled from 'styled-components'
 import { flex, theme } from "components/common/styled"
 
 import deleteSvg from "assets/img/delete.svg"
-import { FavoriteButton } from "components/ui/FavoriteButton"
 
-import { BookInCart } from "types"
+import { BuyButton } from "components/ui/BuyButton"
 
-type CartItemType = {
-    book: BookInCart
+import { BookInFavorite } from "types"
+
+type FavoriteItemType = {
+    book: BookInFavorite
 }
 
 const Wrapper = styled.div`
     ${flex};
     border-top: 1px solid ${theme.gray}20;
     margin: 5px 0;
-    padding: 10px 0 20px;
+    padding: 10px 15px 20px 0;
     :last-child {
         border-bottom: 1px solid ${theme.gray}20;
+        padding-bottom: 30px;
     }
     @media(max-width: 565px) {
         flex-direction: column;
@@ -54,7 +56,16 @@ const ActionBlock = styled.div`
 
 const Block = styled.div`
     ${flex};
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-end;
+    @media(max-width: 565px) {
+        justify-content: flex-start;
+        ${(props: {buttons: boolean}) => props.buttons &&`
+            justify-content: space-between;
+            margin-top: 15px;
+        `};
+    }
+    
 `
 
 const BookImg = styled(NavLink)`
@@ -77,50 +88,12 @@ const NameAndAuthor = styled(NavLink)`
     }
 `
 
-const Counter = styled.div`
-    width: 120px;
-    margin-right: 10px;
-`
-
-const ButtonMinus = styled.button`
-    width: 30px;
-    height: 30px;
-    background-color: ${theme.orange};
-    border: 1px solid ${theme.orange};
-    border-radius: 5px 0 0 5px;
-    color: ${theme.beige};
-    cursor: pointer;
-    :hover {
-        background-color: ${theme.orange}99;
-    }
-`
-
-const ButtonPlus = styled.button`
-    width: 30px;
-    height: 30px;
-    background-color: ${theme.orange};
-    border: 1px solid ${theme.orange};
-    border-radius: 0 5px 5px 0;
-    color: ${theme.beige};
-    cursor: pointer;
-    :hover {
-        background-color: ${theme.orange}99;
-    }
-`
-
-const InputCount = styled.input`
-    width: 30px;
-    height: 26px;
-    border: none;
-    background-color: ${theme.beige};
-    outline: none;
-    text-align: center;
-    color: ${theme.brown}
-`
-
 const PriceBlock = styled.div`
     text-align: right;
     width: 120px;
+    @media(max-width: 565px) {
+        text-align: left;
+    }
 `
 
 const CurrentPrice = styled.p`
@@ -144,7 +117,6 @@ const Economy = styled.p`
 const ActionButton = styled.div`
     ${flex};
     cursor: pointer;
-
 `
 
 const ButtonImg = styled.img`
@@ -158,7 +130,7 @@ const ButtonLabel = styled.a`
 `
 
 
-export const CartItem: React.FC<CartItemType> = ({book}) => {
+export const FavoriteItem: React.FC<FavoriteItemType> = ({book}) => {
     
     const dispatch = useAppDispatch();
 
@@ -170,25 +142,28 @@ export const CartItem: React.FC<CartItemType> = ({book}) => {
             </InfoBlock>
             <ActionBlock>
                 <Block>
-                    <Counter>
-                        <ButtonMinus onClick = {() => dispatch(minusItem(book.id))}>-</ButtonMinus>
-                        <InputCount value = {book.count}/>
-                        <ButtonPlus onClick = {() => dispatch(addItem(book))}>+</ButtonPlus>
-                    </Counter>
                     <PriceBlock>
-                        <CurrentPrice>{book.info.currentPrice*book.count} ₽</CurrentPrice>
+                        <CurrentPrice>{book.info.currentPrice} ₽</CurrentPrice>
                         {
                             book.info.discount &&
                             <>
-                                <Price>{book.info.price*book.count} ₽</Price>
-                                <Economy>Экономия {book.info.price*book.count - book.info.currentPrice*book.count} ₽</Economy>
+                                <Price>{book.info.price} ₽</Price>
+                                <Economy>Экономия {book.info.price - book.info.currentPrice} ₽</Economy>
                             </>
                         }
                     </PriceBlock>
                 </Block>
-                <Block>
-                    <FavoriteButton book = {book} text = "Отложить" position = "cart"/>
-                    <ActionButton onClick = {() => dispatch(deleteItem(book.id))}>
+                <Block buttons>
+                    {
+                        book.info.inStock &&
+                        <BuyButton 
+                            style = "favorite"
+                            disabled = {false}
+                            book = {book}>
+                            Добавить в корзину
+                        </BuyButton>
+                    }
+                    <ActionButton onClick = {() => dispatch(clickItem(book))}>
                         <ButtonImg src = {deleteSvg}></ButtonImg>
                         <ButtonLabel>Удалить</ButtonLabel>
                     </ActionButton>

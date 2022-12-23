@@ -1,12 +1,11 @@
 import React from "react"
 
 import styled from 'styled-components'
-import { theme } from "components/common/styled"
 
 import { CartItems } from "./CartItems"
 import { CartInfoBlock } from "./CartInfoBlock"
 
-import { BookInCart } from 'redux/types'
+import { BookInCart } from 'types'
 
 type CartFullType = {
     books: BookInCart[],
@@ -22,10 +21,12 @@ const CartSection = styled.section`
     display: grid;
     grid-template-columns: 73% 25%;
     grid-gap: 2%;
+    @media(max-width: 1000px) {
+        grid-template-columns: 100%;
+    }
 `
 
 export const CartFull: React.FC<CartFullType> = ({books, total}) => {
-    console.log(books);
     
     return(
         <CartSection>

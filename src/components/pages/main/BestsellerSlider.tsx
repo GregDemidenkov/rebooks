@@ -10,7 +10,7 @@ import polka from 'assets/img/polka.png'
 
 import { BookCart } from "./BookCart";
 
-import { Book } from "redux/types";
+import { Book } from "types";
 
 type BestsellerSliderType = {
     bestBooks: Book[]

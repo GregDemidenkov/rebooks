@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
+import { useParams } from "react-router-dom"
 
 import { useAppSelector } from "redux/store"
 
@@ -43,17 +44,19 @@ const ReactPaginateStyled = styled(ReactPaginate)`
 `
 
 export const Pagination: React.FC<PaginationType> = ({onChangePage}) => {
-    const {page} = useAppSelector((state) => state.books)
+    const { page, category } = useAppSelector((state) => state.books)
+
+    const params = useParams();
 
     return (
         <ReactPaginateStyled
             breakLabel="..."
             nextLabel=">"
             previousLabel="<"
-            onPageChange={(event: any) => onChangePage(event.selected + 1)}
+            onPageChange={(event: any) => onChangePage(event.selected + 1, category)}
             pageRangeDisplayed={2}
             pageCount={4}
-            forcePage={page - 1}
+            forcePage={params.page ? Number(params.page) - 1 : page}
         />
     )
 }

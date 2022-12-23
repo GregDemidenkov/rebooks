@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client';
 
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'redux/store';
 
-import 'assets/styles/index.scss';
-import 'assets/styles/main.scss'
+import 'assets/styles/reseter.scss';
+import 'assets/styles/scroll.scss'
 import 'assets/styles/slider.scss';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,13 +20,15 @@ const root = ReactDOM.createRoot(
 )
 
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
         <Provider store = {store}>
-          <App />
+          <PersistGate loading = {null} persistor = {persistor}>
+            <App />
+          </PersistGate>
         </Provider>
     </BrowserRouter>,
-  // </React.StrictMode>,
+  </React.StrictMode>,
 )
 
 reportWebVitals();

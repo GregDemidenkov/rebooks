@@ -18,6 +18,9 @@ type RaitingsType = {
 const Wrapper = styled.div`
     ${flex}
     width: 240px;
+    @media(max-width: 450px) {
+        width: 180px;
+    }
 `
 
 export const Raitings: React.FC<RaitingsType> = ({raitingReBooks, countReBoks, raitingLiveLib, countLiveLib}) => {

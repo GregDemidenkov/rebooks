@@ -4,11 +4,12 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { theme, flex } from 'components/common/styled'
 
-import { Book } from 'redux/types'
+import { Book } from 'types'
 
-import { FavoriteIcon } from 'components/ui/FavoriteIcon'
 import { BuyButton } from 'components/ui/BuyButton'
 import cross from 'assets/img/cross.svg'
+
+import { FavoriteButton } from 'components/ui/FavoriteButton'
 
 type BookCartType = {
     book: Book
@@ -181,11 +182,7 @@ export const BookCart: React.FC<BookCartType> = ({book}) => {
                     </Stock>
 
                 }
-                <FavoriteIcon 
-                    width = "22px"
-                    height = "22px"
-                    active = {false}
-                />
+                <FavoriteButton book = {book}/>
             </Buttons>
         </Cart>
     )

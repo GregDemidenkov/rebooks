@@ -1,5 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore, combineReducers } from "@reduxjs/toolkit"
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { 
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER, } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import bestsellersReducer from "./books/bestsellersSlice"
 import recommendationReducer from "./books/recommendationSlice"
@@ -14,19 +24,39 @@ import publishersBooksReducer from "./publishers/publishersBooksSlice"
 
 import cartReducer from './cart/cartSlice'
 
-export const store = configureStore({
-    reducer: {
-        bestsellers: bestsellersReducer,
-        recommendation: recommendationReducer,
-        book: bookPageReducer,
-        books: booksReducer,
-        authors: authorsReducer,
-        authorsBooks: authorsBooksReducer,
-        publishers: publishersReducer,
-        publishersBook: publishersBooksReducer,
-        cart: cartReducer
-    }
+import favoriteReducer from "./favorite/favoriteSlice";
+
+const persistConfig = {
+    key: 'root',
+    storage: storage
+};
+
+const rootReducer = combineReducers({
+    bestsellers: bestsellersReducer,
+    recommendation: recommendationReducer,
+    book: bookPageReducer,
+    books: booksReducer,
+    authors: authorsReducer,
+    authorsBooks: authorsBooksReducer,
+    publishers: publishersReducer,
+    publishersBook: publishersBooksReducer,
+    cart: cartReducer,
+    favorite: favoriteReducer
 })
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
+
+export const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>;
 

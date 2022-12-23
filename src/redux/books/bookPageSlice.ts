@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "../types"
+import { Book, host } from "../../types"
 
 export const getBookById = createAsyncThunk("book/getBookById", async (id: string | undefined) => {
     const response = await fetch(`${host}books?id=${id}`)

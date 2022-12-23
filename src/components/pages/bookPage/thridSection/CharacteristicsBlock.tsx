@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Wrapper, Label } from "./AnnotationBlock";
 import { RowEl, Parametr } from "../secondSection/InfoBlock";
 
-import { characteristics } from "redux/types";
+import { characteristics } from "types";
 
 type CharacteristicsBlockType = {
     characteristics: characteristics | null,
@@ -27,14 +27,14 @@ export const CharacteristicsBlock: React.FC<CharacteristicsBlockType> = ({charac
                         <tr>
                             <RowEl parametr><Parametr>Автор</Parametr></RowEl>
                             <RowEl value>{author}</RowEl>
-                            <RowEl parametr><Parametr>Возрастное ограничение</Parametr></RowEl>
-                            <RowEl value>{characteristics?.ageLimit}+</RowEl>
+                            <RowEl alt parametr><Parametr>Возрастное ограничение</Parametr></RowEl>
+                            <RowEl alt value>{characteristics?.ageLimit}+</RowEl>
                         </tr>
                         <tr>
                             <RowEl parametr><Parametr>Жанр</Parametr></RowEl>
                             <RowEl value>{characteristics?.genre}</RowEl>
-                            <RowEl parametr><Parametr>Количество страниц</Parametr></RowEl>
-                            <RowEl value>{characteristics?.pageCount}</RowEl>
+                            <RowEl alt parametr><Parametr>Количество страниц</Parametr></RowEl>
+                            <RowEl alt value>{characteristics?.pageCount}</RowEl>
                         </tr>
                         <tr>
                             <RowEl parametr><Parametr>Издательство</Parametr></RowEl>
@@ -47,14 +47,32 @@ export const CharacteristicsBlock: React.FC<CharacteristicsBlockType> = ({charac
                                     ))
                                 }
                             </RowEl>
-                            <RowEl parametr><Parametr>Переплёт</Parametr></RowEl>
-                            <RowEl value>{characteristics?.binding}</RowEl>
+                            <RowEl alt parametr><Parametr>Переплёт</Parametr></RowEl>
+                            <RowEl alt value>{characteristics?.binding}</RowEl>
                         </tr>
                         <tr>
                             <RowEl parametr><Parametr>Год</Parametr></RowEl>
                             <RowEl value>{characteristics?.year}</RowEl>
-                            <RowEl parametr><Parametr>Вес</Parametr></RowEl>
-                            <RowEl value>{characteristics?.weight} кг</RowEl>
+                            <RowEl alt parametr><Parametr>Вес</Parametr></RowEl>
+                            <RowEl alt value>{characteristics?.weight} кг</RowEl>
+                        </tr>
+
+
+                        <tr>
+                            <RowEl mobile parametr><Parametr>Возрастное ограничение</Parametr></RowEl>
+                            <RowEl mobile value>{characteristics?.ageLimit}+</RowEl>
+                        </tr>
+                        <tr>
+                            <RowEl mobile parametr><Parametr>Количество страниц</Parametr></RowEl>
+                            <RowEl mobile value>{characteristics?.pageCount}</RowEl>
+                        </tr>
+                        <tr>
+                            <RowEl mobile parametr><Parametr>Переплёт</Parametr></RowEl>
+                            <RowEl mobile value>{characteristics?.binding}</RowEl>
+                        </tr>
+                        <tr>
+                            <RowEl mobile parametr><Parametr>Вес</Parametr></RowEl>
+                            <RowEl mobile value>{characteristics?.weight} кг</RowEl>
                         </tr>
                     </tbody>
                 </Characteristics>

@@ -3,13 +3,14 @@ import React from "react"
 import styled from 'styled-components'
 import { theme, flex } from "components/common/styled";
 
-import { Book, price } from 'redux/types'
+import { Book, price } from 'types'
 
 import checkMark from 'assets/img/checkMark.svg'
 import cross from 'assets/img/cross.svg'
 
-import { FavoriteIcon } from 'components/ui/FavoriteIcon'
 import { BuyButton } from 'components/ui/BuyButton'
+
+import { FavoriteButton } from "components/ui/FavoriteButton";
 
 type BuyBlockType = {
     priceObj: price,
@@ -20,6 +21,14 @@ const Wrapper = styled.div`
     flex-basis: 38%;
     display: flex;
     justify-content: flex-end;
+    @media(max-width: 1000px) {
+        flex-basis: 60%;
+    }
+    @media(max-width: 660px) {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-top: 20px;
+    }
 `
 
 const PriceCart = styled.div`
@@ -27,6 +36,9 @@ const PriceCart = styled.div`
     height: 300px;
     border-radius: 10px;
     border: 1px solid ${theme.brown};
+    @media(max-width: 660px) {
+        width: 346px;
+    }
 `
 
 const Stock = styled.div`
@@ -93,12 +105,6 @@ const FavoriteBlock = styled.a`
     margin: 20px 0 0 20px;
 `
 
-const FavoriteText = styled.p`
-    color: ${theme.gray};
-    font-size: 18px;
-    margin-left: 5px;
-`
-
 export const BuyBlock: React.FC<BuyBlockType> = ({book, priceObj}) => {
  
     return (
@@ -131,12 +137,7 @@ export const BuyBlock: React.FC<BuyBlockType> = ({book, priceObj}) => {
                         </BuyButton>
                     }
                 <FavoriteBlock>
-                    <FavoriteIcon 
-                        width = "22px"
-                        height = "22px"
-                        active = {false}
-                    />
-                    <FavoriteText>Добавить в избранное</FavoriteText>
+                    <FavoriteButton book = {book} text = "Добавить в избранное"/>
                 </FavoriteBlock>
             </PriceCart>
         </Wrapper>

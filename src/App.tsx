@@ -16,9 +16,8 @@ const App: React.FC = () => {
   return (
     <Routes>
         <Route path = "/" element = {<Layout />}>
-          <Route index element = {<Main />}></Route>
+          <Route path = {paths.main} element = {<Main />}></Route>
           <Route path = {paths.books} element = {<Books />}></Route>
-          <Route path = {paths.genre} element = {<Books />}></Route>
           <Route path = {paths.authors} element = {<Authors />}></Route>
           <Route path = {paths.publishier} element = {<Publishiers />}></Route>
           <Route path = {paths.favorite} element = {<Favorite />}></Route>

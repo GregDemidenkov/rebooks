@@ -64,10 +64,31 @@ export type BookInCart = {
     id: number,
     name: string,
     author: string,
-    img: string,
-    price: number,
-    discount: number | null,
-    currentPrice: number,
-    weight: number,
+    imgUrlFront: string,
+    info: {
+        price: number,
+        discount: number | null,
+        currentPrice: number,
+        inStock: boolean,
+    },
+    characteristics: {
+        weight: number
+    },
     count: number
+}
+
+export type BookInFavorite = {
+    id: number,
+    name: string,
+    author: string,
+    imgUrlFront: string,
+    info: {
+        price: number,
+        discount: number | null,
+        currentPrice: number,
+        inStock: boolean,
+    },
+    characteristics: {
+        weight: number
+    },
 }

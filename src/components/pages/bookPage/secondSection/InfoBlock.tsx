@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 import styled from 'styled-components'
 import { theme, flex } from "components/common/styled";
 
-import { content, characteristics } from "redux/types";
+import { content, characteristics } from "types";
 
 type infoBlockType = {
     contentObj: content | null,
@@ -19,6 +19,9 @@ const Wrapper = styled.div`
     justify-content: space-around;
     flex-basis: 40%;
     margin: 0 40px;
+    @media(max-width: 1000px) {
+        display: none;
+    }
 `
 
 const Block = styled.div`
@@ -71,12 +74,11 @@ const ReadMoreLink = styled(Link)`
 const ShortCharacteristics = styled.table`
     font-size: 16px;
     text-align: left;
-    max-width: 500px;
 `
 
 export const RowEl = styled.th`
     ${(props: {parametr: string}) => props.parametr &&`
-        width: 390px;
+        width: 500px;
         position: relative;
         color: ${theme.gray};
         padding: 5px 90px 5px 0;
@@ -90,10 +92,21 @@ export const RowEl = styled.th`
         }
     `}
     ${(props: {value: string}) => props.value &&`
-        width: 300px;
+        width: 390px;
         color: ${theme.brown};
-        margin-right: 15px;
+        margin-right: 20px;
         padding: 0 0 0 1px;
+    `}
+    ${(props: {alt: string}) => props.alt &&`
+        @media(max-width: 750px) {
+            display: none;
+        }
+    `}
+    ${(props: {mobile: string}) => props.mobile &&`
+        display: none;
+        @media(max-width: 750px) {
+            display: table-cell;
+        }
     `}
 `
 

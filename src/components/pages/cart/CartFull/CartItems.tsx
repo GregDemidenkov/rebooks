@@ -6,7 +6,7 @@ import { clearCart } from "redux/cart/cartSlice"
 import styled from 'styled-components'
 import { flex, theme } from "components/common/styled"
 
-import { BookInCart } from "redux/types"
+import { BookInCart } from "types"
 import deleteSvg from "assets/img/delete.svg"
 
 import { CartItem } from "./CartItem"

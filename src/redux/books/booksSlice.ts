@@ -1,29 +1,32 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "../types"
+import { Book, host } from "../../types"
+
+import { slidebarList } from "components/pages/books/slidebar/slidebar-data-mock"
 
 type getBooksType = {
-    category: String,
+    genre: String,
     sort: String,
     page: number
 }
 
 const getFilterBySort = (sort: String) => {
     switch (sort) {
-        case "Сначала дешевые":
+        case "cheap":
             return "&_sort=info.currentPrice&_order=asc"
-        case "Сначала дорогие":
+        case "expensive":
             return "&_sort=info.currentPrice&_order=desc"
-        case "Сначала новые":
+        case "new":
             return "&_sort=characteristics.year&_order=desc"   
         default:
             return "&_sort=raiting.countBuy&_order=desc"
     }
 }
 
-export const getBooks = createAsyncThunk<Book[], getBooksType>("books/getBooks", async ({category, sort, page}) => {
-    const filterByCategory: String = category === "Все категории" ? "?" : `?characteristics.genre=${category}`;
+export const getBooks = createAsyncThunk<Book[], getBooksType>("books/getBooks", async ({genre, sort, page}) => {
+    const foundItem = slidebarList.find((obj) => obj.url === genre)
+    const filterByCategory: String = foundItem?.label === "Все категории" ? "?" : `?characteristics.genre=${foundItem?.label}`;
     const filterBySort = getFilterBySort(sort)
-    const filterByPage = category === "Все категории" ? `&_limit=18&_page=${page}` : ""    
+    const filterByPage = foundItem?.label === "Все категории" ? `&_limit=18&_page=${page}` : ""    
     
     return fetch(`${host}books${filterByCategory}${filterBySort}${filterByPage}`)
     .then((res) => 
@@ -51,11 +54,9 @@ const booksSlice = createSlice({
     name: "books",
     initialState,
     reducers: {
-        // getBooksList(state, action: PayloadAction<Book[]>) {
-        //     state.list = action.payload;
-        // },
         setCategory(state, action: PayloadAction<String>) {
-            state.category = action.payload;
+            const foundItem = slidebarList.find((obj) => obj.url === action.payload)
+            state.category = foundItem ? foundItem.label : state.category;
         },
         setSort(state, action: PayloadAction<String>) {
             state.sort = action.payload;

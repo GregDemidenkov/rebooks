@@ -15,6 +15,11 @@ const Wrapper = styled.div`
 
 const Icon = styled.img`
     margin-right: 5px;
+    @media(max-width: 450px) {
+        width: 16px;
+        height: 16px;
+        margin-bottom: 2px;
+    }
 `
 
 const Raiting = styled.p`
@@ -23,12 +28,15 @@ const Raiting = styled.p`
     span {
         color: ${theme.gray};
     }
+    @media(max-width: 450px) {
+        font-size: 16px;
+    }
 `
 
 export const RaitingItem: React.FC<RaitingItemType> = ({icon, raiting, count}) => {
     return (
         <Wrapper>
-            <Icon src = {icon} alt="иконка рейтинга" />
+            <Icon src = {icon}/>
             <Raiting>{raiting}<span> ({count})</span></Raiting>
         </Wrapper>
     )

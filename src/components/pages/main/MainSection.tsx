@@ -4,8 +4,6 @@ import { Link } from "react-router-dom"
 import styled from 'styled-components'
 import { theme, Container, flex } from "components/common/styled"
 
-import booksBack from 'assets/img/booksBack.png'
-
 type MainSectionType = {
     mainBestseller: string | undefined,
     id: number
@@ -13,8 +11,8 @@ type MainSectionType = {
 
 const Section = styled.section`
     padding: 160px 0 0;
-    @media(max-width: 1300px) {
-        background-position: 0 75px;
+    @media(max-width: 750px) {
+        padding: 220px 0 90px;
     }
 `
 
@@ -22,13 +20,21 @@ const SectionContent = styled.section`
     ${flex};
     justify-content: space-around;
     padding-bottom: 80px;
+    @media(max-width: 750px) {
+        flex-direction: column;
+    }
 `
 
 const Info = styled.div`
     ${flex};
     flex-direction: column;
-    height: 200px;
-    width: 700px;
+    width: 70%;
+    @media(max-width: 1000px) {
+        width: 50%;
+    }
+    @media(max-width: 750px) {
+        width: 100%;
+    }
 `
 
 const Slogan = styled.h2`
@@ -38,20 +44,32 @@ const Slogan = styled.h2`
     span {
         color: ${theme.orange};
     }
+    @media(max-width: 1100px) {
+        font-size: 28px;
+    }
 `
 
 const Text = styled.p`
     font-size: 24px;
+    text-align: center;
     color: ${theme.orange};
-    // background-color: ${theme.brown};
     padding: 8px 10px;
     border-radius: 7px;
+    @media(max-width: 1100px) {
+        font-size: 16px;
+    }
 `
 
 const Bestseller = styled(Link)`
     position: relative;
     width: 20%;
     cursor: pointer;
+    @media(max-width: 1000px) {
+        width: 30%;
+    }
+    @media(max-width: 750px) {
+        display: none;
+    }
 `
 
 const BestsellerInfo = styled.h3`
@@ -64,6 +82,12 @@ const BestsellerInfo = styled.h3`
     background-color: ${theme.brown};
     padding: 5px 0;
     width: 100%;
+    @media(max-width: 1220px) {
+        font-size: 18px;
+    }
+    @media(max-width: 1100px) {
+        font-size: 12px;
+    }
 `
 
 const Img = styled.img`
@@ -84,7 +108,7 @@ export const MainSection: React.FC<MainSectionType> = ({mainBestseller, id}) => 
                         <Text>Мировые авторы, лучшие редакции и низкие цены <span>только у нас!</span></Text>
                     </Info>
                     <Bestseller to = {`book/${id}`} id = {id}>
-                        <Img src={mainBestseller} alt="" />
+                        <Img src={mainBestseller} />
                         <BestsellerInfo>Главный бестселлер месяца</BestsellerInfo>
                     </Bestseller>
                 </SectionContent>

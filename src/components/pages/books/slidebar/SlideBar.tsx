@@ -62,7 +62,7 @@ export const SlideBar: React.FC<SlideBarType> = ({onChangeCategory}) => {
                         slidebarList.map((el, i) => (
                             <MenuEl 
                                 active = {el.label === category ? true : false} 
-                                onClick = {() => onChangeCategory(el.label)} 
+                                onClick = {() => onChangeCategory(el.label, el.url)} 
                                 key = {i}>
                                 {el.label}
                             </MenuEl>

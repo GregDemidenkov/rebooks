@@ -3,7 +3,7 @@ import React from "react";
 import styled from 'styled-components'
 import { theme } from "components/common/styled";
 
-import { content } from "redux/types";
+import { content } from "types";
 
 import { QuotesBlock } from './QuotesBlock'
 

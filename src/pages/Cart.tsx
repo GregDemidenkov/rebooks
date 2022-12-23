@@ -2,7 +2,7 @@ import React, {useEffect} from "react"
 
 import { useAppSelector } from "redux/store"
 
-import { CartFull } from "components/pages/cart/CartFull/CartFull"
+import { CartFull } from "components/pages/cart/cartFull/CartFull"
 import { CartEmpty } from "components/pages/cart/CartEmpty"
 
 import { Container, ContainerContent, PageName } from "components/common/styled"

@@ -5,7 +5,7 @@ import { useAppSelector } from "redux/store"
 import styled from 'styled-components'
 import { flex } from 'components/common/styled'
 
-import { Book } from 'redux/types'
+import { Book } from 'types'
 
 import { BookCart } from './BookCart'
 import { Sort } from './sort/Sort'

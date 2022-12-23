@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { Book, host } from "../types"
+import { Book, host } from "../../types"
 
 export const getBestsellers = createAsyncThunk<Book[]>("bestsellers/getBestsellers", async () => {
     return fetch(`${host}books?_sort=raiting.countBuy&_order=desc&_limit=10`)

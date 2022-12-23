@@ -7,11 +7,12 @@ import styled from 'styled-components'
 import { theme, flex, Container } from "../styled"
 
 import logoSvg from 'assets/img/logo.svg';
-
-import { FavoriteIcon } from "components/ui/FavoriteIcon";
-import { CartIcon } from "components/ui/CartIcon";
+import favorite from 'assets/img/favorite.svg'
+import cart from 'assets/img/cart.svg'
 
 import { Search } from "./Search"
+
+import { paths } from "routing/config"
 
 const HeaderStyled = styled.header`
     background-color: ${theme.beige};
@@ -84,6 +85,15 @@ const NavLinkStyled = styled(NavLink)`
     `}
 `
 
+const NavIcon = styled.img`
+    width: 28px;
+    height: 28px;
+    @media(max-width: 1300px) {
+        width: 20px;
+        height: 20px;
+    }
+`
+
 const CartCountBlock = styled.div`
     position: absolute;
     top: 11px;
@@ -119,7 +129,7 @@ export const Header: React.FC = () => {
         <HeaderStyled>
             <Container>
                 <HeaderContent>
-                    <NavLinkStyled to = "/" logo>
+                    <NavLinkStyled to = {paths.main} logo>
                         <Icon  
                             src = {logoSvg} 
                             alt = "ReBooks" 
@@ -128,19 +138,11 @@ export const Header: React.FC = () => {
                     </NavLinkStyled>
                     <Search></Search>
                     <Nav personalPages>
-                        <NavLinkStyled to = "/favorite">
-                            <FavoriteIcon
-                                width = "28px"
-                                height = "28px"
-                                toFavorite
-                            />
+                        <NavLinkStyled to = {paths.favorite}>
+                            <NavIcon src = {favorite}/>
                         </NavLinkStyled>
-                        <NavLinkStyled to = "/cart">
-                            <CartIcon 
-                                width = "28px"
-                                height = "28px"
-                                fill = {theme.orange}
-                            />
+                        <NavLinkStyled to = {paths.cart}>
+                            <NavIcon src = {cart}/>
                             {
                                 totalCount !== 0 &&
                                 <CartCountBlock>
@@ -152,9 +154,9 @@ export const Header: React.FC = () => {
                 </HeaderContent>
                 <HeaderContent>
                     <Nav pages>
-                        <NavLinkStyled to = "/books" pagesEl >Книги</NavLinkStyled>
-                        <NavLinkStyled to = "/authors" pagesEl >Авторы</NavLinkStyled>
-                        <NavLinkStyled to = "/publishier" pagesEl >Издательства</NavLinkStyled>
+                        <NavLinkStyled to = "books/all-categories/page_1/sort_popular" pagesEl >Книги</NavLinkStyled>
+                        <NavLinkStyled to = {paths.authors} pagesEl >Авторы</NavLinkStyled>
+                        <NavLinkStyled to = {paths.publishier} pagesEl >Издательства</NavLinkStyled>
                     </Nav>
                 </HeaderContent>
             </Container>

@@ -1,18 +1,18 @@
 import React from 'react'
 
-import { useAppDispatch, useAppSelector } from "redux/store"
+import { useAppDispatch } from "redux/store"
 import { addItem } from "redux/cart/cartSlice"
 
 import styled from 'styled-components'
 import { theme } from 'components/common/styled'
 
-import { Book } from 'redux/types'
+import { Book, BookInFavorite } from 'types'
 
 type BuyButtonType = {
     disabled: boolean,
     style: string,
     children: string,
-    book: Book
+    book: Book | BookInFavorite
 }
 
 const ButtonBuyStyled = styled.button`
@@ -33,6 +33,13 @@ const ButtonBuyStyled = styled.button`
         padding: 15px 30px;
         margin: 35px 0 0 20px;
     `};
+    ${(props: {styleType: string}) => props.styleType == "favorite" &&`
+        padding: 10px 20px;
+        margin: 0 20px 0 0;
+        @media(max-width: 565px) {
+            width: 200px;
+        }
+    `};
     :hover {
         background-color: ${theme.orange}99;
     }
@@ -49,11 +56,16 @@ export const BuyButton: React.FC<BuyButtonType> = ({
         id: book.id,
         name: book.name,
         author: book.author,
-        img: book.imgUrlFront,
-        price: book.info.price,
-        discount: book.info.discount,
-        currentPrice: book.info.currentPrice,
-        weight: book.characteristics.weight,
+        imgUrlFront: book.imgUrlFront,
+        info: {
+            price: book.info.price,
+            discount: book.info.discount,
+            currentPrice: book.info.currentPrice,
+            inStock: book.info.inStock,
+        },
+        characteristics: {
+            weight: book.characteristics.weight
+        },
         count: 1
     }
 
