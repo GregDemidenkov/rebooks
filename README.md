@@ -14,3 +14,4 @@ You will also see any lint errors in the console.
 + Redux(Redux Toolkit), redux-persist
 + Typescript
 + styled-components
++ json-server
