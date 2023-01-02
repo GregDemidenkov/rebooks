@@ -1,5 +1,10 @@
 # Getting Started with Create React App
 
+### `npm run server`
+
+Runs the json-server.\
+Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
+
 ### `npm start`
 
 Runs the app in the development mode.\
