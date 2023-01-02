@@ -35,12 +35,13 @@ export const Books: React.FC = () => {
 
         window.scrollTo(0, 0);
         document.title = "Книги"
+        navigate("/all-categories/page_1/sort_popular")
 
     }, [sort, page, params])
 
     const onChangeCategory = (category: string, url: string) => {
         window.scrollTo(0, 0);
-        navigate(`/books/${url}/page_${page}/sort_${sort}`)
+        navigate(`/${url}/page_1/sort_${sort}`)
         dispatch(setCategory(category))
         if (category !== "Все категории") {
             dispatch(setPage(1))
@@ -51,14 +52,14 @@ export const Books: React.FC = () => {
         dispatch(setSort(sort))
         dispatch(setPage(1))
         const foundItem = slidebarList.find((obj) => obj.label === category)
-        navigate(`/books/${foundItem?.url}/page_1/sort_${sort}`)
+        navigate(`/${foundItem?.url}/page_1/sort_${sort}`)
     };
 
     const onChangePage = (page: number, category: string) => {
         window.scrollTo(0, 0);
         dispatch(setPage(page))
         const foundItem = slidebarList.find((obj) => obj.label === category)
-        navigate(`/books/${foundItem?.url}/page_${page}/sort_${sort}`)
+        navigate(`/${foundItem?.url}/page_${page}/sort_${sort}`)
     };
     
     return (

@@ -160,7 +160,7 @@ export const Search: React.FC = () => {
                     {
                         isFind && findedBooks.length > 0 ?
                         findedBooks.slice(0, 4).map((book) => (
-                            <FindedBook onClick = {() => setIsVisible(!isVisible)} to = {`/book/${book.id}`} id = {book.id}>
+                            <FindedBook key = {book.id} onClick = {() => setIsVisible(!isVisible)} to = {`/book/${book.id}`} id = {book.id}>
                                 <Img src = {book.imgUrlFront} />
                                 <Name>{book.name}: <span>{book.author}</span></Name>
                                 <Price>{book.info.currentPrice}₽</Price>
